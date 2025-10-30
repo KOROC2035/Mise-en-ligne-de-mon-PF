@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roger Ciriaque Koadere - Expériences</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --cyan: #00ffff;
+            --orange: #ff8c00;
+            --purple: #8a2be2;
+            --green: #00ff7f;
+            --dark-blue: #0a1128;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+            background: var(--dark-blue);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Effets lumineux */
+        .glow-cyan {
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+        }
+
+        .glow-orange {
+            box-shadow: 0 0 20px rgba(255, 140, 0, 0.4);
+        }
+
+        .glow-purple {
+            box-shadow: 0 0 20px rgba(138, 43, 226, 0.4);
+        }
+
+        .glow-green {
+            box-shadow: 0 0 20px rgba(0, 255, 127, 0.4);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes timelineAppear {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, var(--cyan), var(--orange), var(--purple), var(--green));
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 5s ease infinite;
+        }
+
+        /* Cards hover effects */
+        .experience-card {
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .experience-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .experience-card:hover::before {
+            left: 100%;
+        }
+
+        .experience-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Navigation active state */
+        .nav-active {
+            color: var(--cyan);
+            position: relative;
+        }
+
+        .nav-active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--cyan), var(--orange));
+        }
+
+        /* Timeline styles */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0.75rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--cyan), var(--purple));
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            animation: timelineAppear 0.8s ease-out forwards;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 0.5rem;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            background: var(--cyan);
+            border: 3px solid var(--dark-blue);
+            box-shadow: 0 0 10px var(--cyan);
+        }
+
+        .timeline-item:nth-child(2n)::before {
+            background: var(--orange);
+            box-shadow: 0 0 10px var(--orange);
+        }
+
+        .timeline-item:nth-child(3n)::before {
+            background: var(--purple);
+            box-shadow: 0 0 10px var(--purple);
+        }
+
+        .timeline-item:nth-child(4n)::before {
+            background: var(--green);
+            box-shadow: 0 0 10px var(--green);
+        }
+
+        /* Tech badges */
+        .tech-badge {
+            transition: all 0.3s ease;
+            font-size: 0.75rem;
+        }
+
+        .tech-badge:hover {
+            transform: scale(1.05);
+        }
+
+        /* Progress bars */
+        .skill-bar {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            height: 6px;
+        }
+
+        .skill-progress {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 1.5s ease-in-out;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .timeline {
+                padding-left: 1.5rem;
+            }
+            
+            .timeline::before {
+                left: 0.5rem;
+            }
+            
+            .timeline-item::before {
+                left: -1.5rem;
+                width: 0.75rem;
+                height: 0.75rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .timeline {
+                padding-left: 1rem;
+            }
+            
+            .timeline::before {
+                left: 0.25rem;
+            }
+            
+            .timeline-item::before {
+                left: -1rem;
+                width: 0.5rem;
+                height: 0.5rem;
+            }
+        }
+
+        /* Certification cards */
+        .certification-card {
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .certification-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Stats cards */
+        .stats-card {
+            transition: all 0.3s ease;
+        }
+
+        .stats-card:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-[#0a1128] bg-opacity-95 backdrop-blur-md border-b border-cyan-500 border-opacity-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex justify-between items-center">
+                <div class="text-2xl font-bold gradient-text">RCK</div>
+                
+                <div class="hidden lg:flex space-x-8">
+                    <a href="Accueil.html" class="text-gray-300 hover:text-cyan-400 transition-colors duration-300">Accueil</a>
+                    <a href="About.html" class="text-gray-300 hover:text-cyan-400 transition-colors duration-300">À Propos</a>
+                    <a href="Compétences.html" class="text-gray-300 hover:text-cyan-400 transition-colors duration-300">Compétences</a>
+                    <a href="Projets.html" class="text-gray-300 hover:text-cyan-400 transition-colors duration-300">Projets</a>
+                    <a href="Expériences.html" class="nav-active text-cyan-400 transition-colors duration-300">Expériences</a>
+                    <a href="Contact.html" class="text-gray-300 hover:text-cyan-400 transition-colors duration-300">Contact</a>
+                </div>
+
+                <button class="lg:hidden text-cyan-400 focus:outline-none" id="menuBtn">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Section Expériences -->
+    <section id="experiences" class="pt-32 pb-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- En-tête -->
+            <div class="text-center mb-16 fade-in-up">
+                <h1 class="text-4xl md:text-6xl font-bold gradient-text mb-6">Mon Parcours</h1>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Découvrez mon parcours professionnel, mes expériences significatives et les certifications 
+                    qui ont jalonné mon développement en tant que développeur IA et web.
+                </p>
+            </div>
+
+            <!-- Statistiques -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-16">
+                <div class="stats-card text-center p-4 md:p-6 rounded-2xl bg-gray-800 bg-opacity-50 glow-cyan fade-in-up">
+                    <div class="text-2xl md:text-3xl font-bold text-cyan-400 mb-2" id="statYears">0</div>
+                    <div class="text-gray-400 text-xs md:text-sm">Années d'Expérience</div>
+                </div>
+                <div class="stats-card text-center p-4 md:p-6 rounded-2xl bg-gray-800 bg-opacity-50 glow-orange fade-in-up" style="animation-delay: 0.1s;">
+                    <div class="text-2xl md:text-3xl font-bold text-orange-400 mb-2" id="statProjects">0</div>
+                    <div class="text-gray-400 text-xs md:text-sm">Projets Livrés</div>
+                </div>
+                <div class="stats-card text-center p-4 md:p-6 rounded-2xl bg-gray-800 bg-opacity-50 glow-purple fade-in-up" style="animation-delay: 0.2s;">
+                    <div class="text-2xl md:text-3xl font-bold text-purple-400 mb-2" id="statCertifs">0</div>
+                    <div class="text-gray-400 text-xs md:text-sm">Certifications</div>
+                </div>
+                <div class="stats-card text-center p-4 md:p-6 rounded-2xl bg-gray-800 bg-opacity-50 glow-green fade-in-up" style="animation-delay: 0.3s;">
+                    <div class="text-2xl md:text-3xl font-bold text-green-400 mb-2" id="statClients">0</div>
+                    <div class="text-gray-400 text-xs md:text-sm">Clients Satisfaits</div>
+                </div>
+            </div>
+
+            <!-- Timeline des expériences professionnelles -->
+            <div class="mb-20">
+                <h2 class="text-3xl md:text-4xl font-bold text-cyan-400 text-center mb-12 fade-in-up">
+                    <i class="fas fa-briefcase mr-4"></i>Expériences Professionnelles
+                </h2>
+
+                <div class="timeline max-w-4xl mx-auto">
+                    <!-- Expérience 1 -->
+                    <div class="timeline-item fade-in-up" style="animation-delay: 0.4s;">
+                        <div class="experience-card rounded-2xl p-6 glow-cyan">
+                            <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4 gap-2">
+                                <div>
+                                    <h3 class="text-xl font-bold text-cyan-400 mb-2">Développeur Web Full Stack</h3>
+                                    <p class="text-gray-300 font-semibold">Stage en Imprimerie Digitale</p>
+                                </div>
+                                <div class="text-right">
+                                    <span class="inline-block px-3 py-1 bg-cyan-500 bg-opacity-20 text-cyan-300 rounded-full text-sm">
+                                        Jan 2023 - Juin 2023
+                                    </span>
+                                </div>
+                            </div>
+                            
+                            <p class="text-gray-300 mb-4 leading-relaxed">
+                                Développement d'une plateforme web interne pour la gestion des commandes d'impression 
+                                et le suivi de production. Interface admin et espace client avec tableau de bord temps réel.
+                            </p>
+                            
+                            <div class="mb-4">
+                                <h4 class="text-sm font-semibold text-white mb-2">Missions principales :</h4>
+                                <ul class="text-gray-300 text-sm space-y-1 ml-4">
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check text-green-400 mr-2 text-xs"></i>
+                                        Conception et développement du frontend avec React.js
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check text-green-400 mr-2 text-xs"></i>
+                                        Création d'API REST avec Node.js et Express
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check text-green-400 mr-2 text-xs"></i>
+                                        Intégration de système de paiement en ligne
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check text-green-400 mr-2 text-xs"></i>
+                                        Optimisation des performances et SEO
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <div class="flex flex-wrap gap-2">
+                                <span class="tech-badge px-3 py-1 bg-cyan-500 bg-opacity-20 text-cyan-300 rounded-full border border-cyan-500 border-opacity-30">
+                                    React.js
+                                </span>
+                                <span class="tech-badge px-3 py-1 bg-cyan-500 bg-opacity-20 text-cyan-300 rounded-full border border-cyan-500 border-opacity-30">
+                                    Node.js
+                                </span>
+                                <span class="tech-badge px-3 py-1 bg-blue-500 bg-opacity-20 text-blue-300 rounded-full border border-blue-500 border-opacity-30">
+                                    MongoDB
+                                </span>
+                                <span class="tech-badge px-3 py-1 bg-green-500 bg-opacity-20 text-green-300 rounded-full border border-green-500 border-opacity-30">
+                                    Express.js
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Expérience 2 -->
+                    <div class="timeline-item fade-in-up" style="animation-delay: 0.5s;">
+                        <div class="experience-card rounded-2xl p-6 glow-orange">
+                            <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4 gap-2">
+                                <div>
+                                    <h3 class="text-xl font-bold text-orange-400 mb-2">Développeur IA Freelance</h3>
+                                    <p class="text-gray-300 font-semibold">Projets Indépendants & Collaborations</p>
+                                </div>
+                                <div class="text-right">
+                                    <span class="inline-block px-3 py-1 bg-orange-500 bg-opacity-20 text-orange-300 rounded-full text-sm">
+                                        2022 - Présent
+                                    </span>
+                                </div>
+                            </div>
+                            
+                            <p class="text-gray-300 mb-4 leading-relaxed">
+                                Développement de solutions d'intelligence artificielle sur mesure pour divers clients, 
+                                incluant chatbots intelligents, systèmes de recommandation et outils d'analyse de données.
+                            </p>
+                            
+                            <div class="mb-4">
+                                <h4 class="text-sm font-semibold text-white mb-2">Réalisations clés :</h4>
+                                <ul class="text-gray-300 text-sm space-y-1 ml-4">
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check text-green-400 mr-2 text-xs"></i>
+                                        Assistant IA avec Langchain pour traitement de documents
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check text-green-400 mr-2 text-xs"></i>
+                                        Système de recommandation e-commerce avec machine learning
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check text-green-400 mr-2 text-xs"></i>
+                                        Chatbot conversationnel intégrant NLP
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check text-green-400 mr-2 text-xs"></i>
+                                        API de prédiction avec FastAPI et déploiement Docker
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <div class="flex flex-wrap gap-2">
+                                <span class="tech-badge px-3 py-1 bg-purple-500 bg-opacity-20 text-purple-300 rounded-full border border-purple-500 border-opacity-30">
+                                    Langchain
+                                </span>
+                                <span class="tech-badge px-3 py-1 bg-cyan-500 bg-opacity-20 text-cyan-300 rounded-full border border-cyan-500 border-opacity-30">
+                                    Python
+                                </span>
+                                <span class="tech-badge px-3 py-1 bg-green-500 bg-opacity-20 text-green-300 rounded-full border border-green-500 border-opacity-30">
+                                    FastAPI
+                                </span>
+                                <span class="tech-badge px-3 py-1 bg-blue-500 bg-opacity-20 text-blue-300 rounded-full border border-blue-500 border-opacity-30">
+                                    Docker
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Expérience 3 -->
+                    <div class="timeline-item fade-in-up" style="animation-delay: 0.6s;">
+                        <div class="experience-card rounded-2xl p-6 glow-purple">
+                            <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4 gap-2">
+                                <div>
+                                    <h3 class="text-xl font-bold text-purple-400 mb-2">Développeur Full Stack</h3>
+                                    <p class="text-gray-300 font-semibold">Projets Personnels & Contributions Open Source</p>
+                                </div>
+                                <div class="text-right">
+                                    <span class="inline-block px-3 py-1 bg-purple-500 bg-opacity-20 text-purple-300 rounded-full text-sm">
+                                        2021 - Présent
+                                    </span>
+                                </div>
+                            </div>
+                            
+                            <p class="text-gray-300 mb-4 leading-relaxed">
+                                Développement continu de projets personnels innovants et contributions à des projets 
+                                open source pour perfectionner mes compétences et explorer de nouvelles technologies.
+                            </p>
+                            
+                            <div class="mb-4">
+                                <h4 class="text-sm font-semibold text-white mb-2">Projets significatifs :</h4>
+                                <ul class="text-gray-300 text-sm space-y-1 ml-4">
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check text-green-400 mr-2 text-xs"></i>
+                                        Application de gestion de tâches avec IA intégrée
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check text-green-400 mr-2 text-xs"></i>
+                                        Plateforme d'apprentissage en ligne avec recommandations
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check text-green-400 mr-2 text-xs"></i>
+                                        Outils de développement pour la communauté
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check text-green-400 mr-2 text-xs"></i>
+                                        Contributions à des librairies Python et JavaScript
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <div class="flex flex-wrap gap-2">
+                                <span class="tech-badge px-3 py-1 bg-cyan-500 bg-opacity-20 text-cyan-300 rounded-full border border-cyan-500 border-opacity-30">
+                                    Python
+                                </span>
+                                <span class="tech-badge px-3 py-1 bg-yellow-500 bg-opacity-20 text-yellow-300 rounded-full border border-yellow-500 border-opacity-30">
+                                    JavaScript
+                                </span>
+                                <span class="tech-badge px-3 py-1 bg-green-500 bg-opacity-20 text-green-300 rounded-full border border-green-500 border-opacity-30">
+                                    Vue.js
+                                </span>
+                                <span class="tech-badge px-3 py-1 bg-red-500 bg-opacity-20 text-red-300 rounded-full border border-red-500 border-opacity-30">
+                                    Firebase
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Certifications -->
+            <div class="mb-20">
+                <h2 class="text-3xl md:text-4xl font-bold text-orange-400 text-center mb-12 fade-in-up" style="animation-delay: 0.7s;">
+                    <i class="fas fa-award mr-4"></i>Certifications & Formations
+                </h2>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Certification 1 -->
+                    <div class="certification-card rounded-2xl p-6 glow-cyan fade-in-up" style="animation-delay: 0.8s;">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-cyan-500 bg-opacity-20 rounded-xl flex items-center justify-center mr-4">
+                                <i class="fab fa-python text-cyan-400 text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-cyan-400">Langchain & LLMs</h4>
+                                <p class="text-gray-400 text-sm">Udemy - 2024</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-300 text-sm mb-4">
+                            Maîtrise des modèles de langage large et développement d'applications IA avec Langchain.
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs px-2 py-1 bg-cyan-500 bg-opacity-20 text-cyan-300 rounded">Expert</span>
+                            <a href="#" class="text-cyan-400 hover:text-cyan-300 text-sm">
+                                Voir le certificat <i class="fas fa-external-link-alt ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Certification 2 -->
+                    <div class="certification-card rounded-2xl p-6 glow-purple fade-in-up" style="animation-delay: 0.9s;">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-purple-500 bg-opacity-20 rounded-xl flex items-center justify-center mr-4">
+                                <i class="fas fa-robot text-purple-400 text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-purple-400">Machine Learning</h4>
+                                <p class="text-gray-400 text-sm">Coursera - 2023</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-300 text-sm mb-4">
+                            Fondements du machine learning, deep learning et mise en œuvre de modèles prédictifs.
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs px-2 py-1 bg-purple-500 bg-opacity-20 text-purple-300 rounded">Avancé</span>
+                            <a href="#" class="text-purple-400 hover:text-purple-300 text-sm">
+                                Voir le certificat <i class="fas fa-external-link-alt ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Certification 3 -->
+                    <div class="certification-card rounded-2xl p-6 glow-green fade-in-up" style="animation-delay: 1.0s;">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-green-500 bg-opacity-20 rounded-xl flex items-center justify-center mr-4">
+                                <i class="fab fa-aws text-green-400 text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-green-400">AWS Cloud Practitioner</h4>
+                                <p class="text-gray-400 text-sm">Amazon - 2023</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-300 text-sm mb-4">
+                            Connaissance des services cloud AWS et meilleures pratiques pour le déploiement d'applications.
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs px-2 py-1 bg-green-500 bg-opacity-20 text-green-300 rounded">Intermédiaire</span>
+                            <a href="#" class="text-green-400 hover:text-green-300 text-sm">
+                                Voir le certificat <i class="fas fa-external-link-alt ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Compétences acquises -->
+            <div class="mb-20">
+                <h2 class="text-3xl md:text-4xl font-bold text-green-400 text-center mb-12 fade-in-up" style="animation-delay: 1.1s;">
+                    <i class="fas fa-chart-line mr-4"></i>Évolution des Compétences
+                </h2>
+
+                <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                    <div class="fade-in-up" style="animation-delay: 1.2s;">
+                        <h3 class="text-xl font-bold text-cyan-400 mb-6">Compétences Techniques</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-gray-300">Développement Python</span>
+                                    <span class="text-cyan-400">95%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress bg-cyan-500" style="width: 95%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-gray-300">Intelligence Artificielle</span>
+                                    <span class="text-purple-400">88%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress bg-purple-500" style="width: 88%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-gray-300">Développement Web</span>
+                                    <span class="text-orange-400">92%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress bg-orange-500" style="width: 92%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-gray-300">Architecture Cloud</span>
+                                    <span class="text-green-400">85%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress bg-green-500" style="width: 85%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="fade-in-up" style="animation-delay: 1.3s;">
+                        <h3 class="text-xl font-bold text-orange-400 mb-6">Compétences Professionnelles</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-gray-300">Gestion de Projet</span>
+                                    <span class="text-cyan-400">90%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress bg-cyan-500" style="width: 90%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-gray-300">Communication Client</span>
+                                    <span class="text-purple-400">87%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress bg-purple-500" style="width: 87%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-gray-300">Résolution de Problèmes</span>
+                                    <span class="text-orange-400">94%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress bg-orange-500" style="width: 94%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-gray-300">Adaptabilité</span>
+                                    <span class="text-green-400">96%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress bg-green-500" style="width: 96%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Call to Action -->
+            <div class="text-center fade-in-up" style="animation-delay: 1.4s;">
+                <p class="text-gray-300 text-xl mb-8">Mon parcours vous intéresse pour votre projet ?</p>
+                <a href="contact.html" class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-500 text-white rounded-2xl font-bold glow-cyan hover:glow-purple transition-all duration-300 transform hover:scale-105">
+                    <span>Discutons de votre projet</span>
+                    <i class="fas fa-arrow-right ml-3"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 bg-opacity-50 border-t border-gray-700 border-opacity-30 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="flex justify-center space-x-6 mb-6">
+                    <a href="#" class="text-gray-400 hover:text-cyan-400 transition-colors duration-300 text-xl">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-cyan-400 transition-colors duration-300 text-xl">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-cyan-400 transition-colors duration-300 text-xl">
+                        <i class="fab fa-upwork"></i>
+                    </a>
+                </div>
+                <p class="text-gray-400">&copy; 2024 Roger Ciriaque Koadere. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Animation des statistiques
+        function animateStats() {
+            const stats = [
+                { element: document.getElementById('statYears'), target: 3, suffix: '+' },
+                { element: document.getElementById('statProjects'), target: 25, suffix: '+' },
+                { element: document.getElementById('statCertifs'), target: 8, suffix: '+' },
+                { element: document.getElementById('statClients'), target: 15, suffix: '+' }
+            ];
+
+            stats.forEach(stat => {
+                let current = 0;
+                const increment = stat.target / 50;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= stat.target) {
+                        current = stat.target;
+                        clearInterval(timer);
+                    }
+                    stat.element.textContent = Math.floor(current) + stat.suffix;
+                }, 40);
+            });
+        }
+
+        // Animation des barres de compétences
+        function animateSkillBars() {
+            const skillBars = document.querySelectorAll('.skill-progress');
+            skillBars.forEach(bar => {
+                const targetWidth = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.width = targetWidth;
+                }, 500);
+            });
+        }
+
+        // Intersection Observer pour les animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                    if (entry.target.classList.contains('stats-card')) {
+                        animateStats();
+                    }
+                    if (entry.target.classList.contains('skill-bar')) {
+                        setTimeout(animateSkillBars, 500);
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observer les éléments à animer
+        document.addEventListener('DOMContentLoaded', () => {
+            const animatedElements = document.querySelectorAll('.fade-in-up');
+            animatedElements.forEach(el => {
+                el.style.animationPlayState = 'paused';
+                observer.observe(el);
+            });
+
+            // Menu mobile
+            const menuBtn = document.getElementById('menuBtn');
+            menuBtn.addEventListener('click', () => {
+                alert('Menu mobile - À implémenter');
+            });
+
+            // Smooth scroll pour les ancres
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+        });
+
+        // Effet de parallaxe simple pour les cartes
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.experience-card, .certification-card');
+            parallaxElements.forEach(el => {
+                const speed = 0.03;
+                el.style.transform = `translateY(${scrolled * speed}px) translateY(-5px)`;
+            });
+        });
+    </script>
+</body>
+</html>

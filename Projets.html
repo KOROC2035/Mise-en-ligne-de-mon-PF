@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roger Ciriaque Koadere - Projets</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --cyan: #00ffff;
+            --orange: #ff8c00;
+            --purple: #8a2be2;
+            --green: #00ff7f;
+            --dark-blue: #0a1128;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+            background: var(--dark-blue);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Effets lumineux */
+        .glow-cyan {
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+        }
+
+        .glow-orange {
+            box-shadow: 0 0 20px rgba(255, 140, 0, 0.4);
+        }
+
+        .glow-purple {
+            box-shadow: 0 0 20px rgba(138, 43, 226, 0.4);
+        }
+
+        .glow-green {
+            box-shadow: 0 0 20px rgba(0, 255, 127, 0.4);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, var(--cyan), var(--orange), var(--purple), var(--green));
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 5s ease infinite;
+        }
+
+        /* Cards hover effects */
+        .project-card {
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .project-card:hover::before {
+            left: 100%;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Navigation active state */
+        .nav-active {
+            color: var(--cyan);
+            position: relative;
+        }
+
+        .nav-active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--cyan), var(--orange));
+        }
+
+        /* Project image placeholder */
+        .project-image {
+            background: linear-gradient(135deg, #1e293b, #374151);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Tech badges */
+        .tech-badge {
+            transition: all 0.3s ease;
+            font-size: 0.75rem;
+        }
+
+        .tech-badge:hover {
+            transform: scale(1.05);
+        }
+
+        /* Filter buttons */
+        .filter-btn {
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .filter-btn.active {
+            background: rgba(0, 255, 255, 0.2);
+            border-color: var(--cyan);
+            color: var(--cyan);
+        }
+
+        /* Modal styles */
+        .project-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 17, 40, 0.95);
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-content {
+            background: rgba(30, 41, 59, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-[#0a1128] bg-opacity-95 backdrop-blur-md border-b border-cyan-500 border-opacity-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex justify-between items-center">
+                <div class="text-2xl font-bold gradient-text">RCK</div>
+                
+                <div class="hidden lg:flex space-x-8">
+                    <a href="Accueil.html" class="text-gray-300 hover:text-cyan-400 transition-colors duration-300">Accueil</a>
+                    <a href="About.html" class="text-gray-300 hover:text-cyan-400 transition-colors duration-300">À Propos</a>
+                    <a href="Compétences.html" class="text-gray-300 hover:text-cyan-400 transition-colors duration-300">Compétences</a>
+                    <a href="Projets.html" class="nav-active text-cyan-400 transition-colors duration-300">Projets</a>
+                    <a href="Expériences.html" class="text-gray-300 hover:text-cyan-400 transition-colors">Expériences</a>
+                    <a href="Contact.html" class="text-gray-300 hover:text-cyan-400 transition-colors duration-300">Contact</a>
+                </div>
+
+                <button class="lg:hidden text-cyan-400 focus:outline-none" id="menuBtn">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Section Projets -->
+    <section id="projets" class="pt-32 pb-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- En-tête -->
+            <div class="text-center mb-16 fade-in-up">
+                <h1 class="text-4xl md:text-6xl font-bold gradient-text mb-6">Mes Projets</h1>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Découvrez une sélection de mes réalisations en développement IA et web, 
+                    alliant innovation technique et design moderne.
+                </p>
+            </div>
+
+            <!-- Filtres -->
+            <div class="flex flex-wrap justify-center gap-4 mb-12 fade-in-up" style="animation-delay: 0.2s;">
+                <button class="filter-btn active px-6 py-3 rounded-full bg-cyan-500 bg-opacity-20 text-cyan-400 border-cyan-500 border-opacity-50" data-filter="all">
+                    <i class="fas fa-layer-group mr-2"></i>Tous
+                </button>
+                <button class="filter-btn px-6 py-3 rounded-full bg-purple-500 bg-opacity-10 text-gray-300 border-gray-600 hover:bg-purple-500 hover:bg-opacity-20 hover:text-purple-400 hover:border-purple-500" data-filter="ia">
+                    <i class="fas fa-robot mr-2"></i>IA
+                </button>
+                <button class="filter-btn px-6 py-3 rounded-full bg-orange-500 bg-opacity-10 text-gray-300 border-gray-600 hover:bg-orange-500 hover:bg-opacity-20 hover:text-orange-400 hover:border-orange-500" data-filter="web">
+                    <i class="fas fa-globe mr-2"></i>Web
+                </button>
+                <button class="filter-btn px-6 py-3 rounded-full bg-green-500 bg-opacity-10 text-gray-300 border-gray-600 hover:bg-green-500 hover:bg-opacity-20 hover:text-green-400 hover:border-green-500" data-filter="fullstack">
+                    <i class="fas fa-code mr-2"></i>Full Stack
+                </button>
+            </div>
+
+            <!-- Grille des projets -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="projectsGrid">
+                
+                <!-- Projet 1: Assistant IA avec Langchain -->
+                <div class="project-card rounded-2xl p-6 glow-purple fade-in-up project-item" data-category="ia" style="animation-delay: 0.3s;">
+                    <div class="project-image h-48 mb-6 glow-purple">
+                        <i class="fas fa-robot text-purple-400"></i>
+                    </div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-purple-400">Assistant IA Langchain</h3>
+                        <span class="text-xs px-3 py-1 bg-purple-500 bg-opacity-20 text-purple-300 rounded-full">IA</span>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-6 leading-relaxed">
+                        Assistant intelligent développé avec Langchain, capable de traiter des documents PDF et de répondre aux questions en contexte.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="tech-badge px-3 py-1 bg-purple-500 bg-opacity-20 text-purple-300 rounded-full border border-purple-500 border-opacity-30">
+                            Langchain
+                        </span>
+                        <span class="tech-badge px-3 py-1 bg-cyan-500 bg-opacity-20 text-cyan-300 rounded-full border border-cyan-500 border-opacity-30">
+                            Python
+                        </span>
+                        <span class="tech-badge px-3 py-1 bg-green-500 bg-opacity-20 text-green-300 rounded-full border border-green-500 border-opacity-30">
+                            FastAPI
+                        </span>
+                    </div>
+                    <div class="flex space-x-4">
+                        <button class="view-details-btn flex-1 py-3 bg-purple-500 bg-opacity-20 text-purple-400 rounded-lg font-semibold hover:bg-purple-500 hover:bg-opacity-30 transition-all duration-300" data-project="1">
+                            <i class="fas fa-eye mr-2"></i>Détails
+                        </button>
+                        <a href="#" class="flex items-center justify-center w-12 h-12 bg-gray-700 bg-opacity-50 text-gray-300 rounded-lg hover:bg-gray-600 transition-all duration-300">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Projet 2: Application Web Streamlit -->
+                <div class="project-card rounded-2xl p-6 glow-cyan fade-in-up project-item" data-category="web" style="animation-delay: 0.4s;">
+                    <div class="project-image h-48 mb-6 glow-cyan">
+                        <i class="fas fa-chart-line text-cyan-400"></i>
+                    </div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-cyan-400">Dashboard Analytics</h3>
+                        <span class="text-xs px-3 py-1 bg-cyan-500 bg-opacity-20 text-cyan-300 rounded-full">Web</span>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-6 leading-relaxed">
+                        Dashboard interactif pour l'analyse de données avec visualisations en temps réel et rapports automatisés.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="tech-badge px-3 py-1 bg-cyan-500 bg-opacity-20 text-cyan-300 rounded-full border border-cyan-500 border-opacity-30">
+                            Streamlit
+                        </span>
+                        <span class="tech-badge px-3 py-1 bg-cyan-500 bg-opacity-20 text-cyan-300 rounded-full border border-cyan-500 border-opacity-30">
+                            Python
+                        </span>
+                        <span class="tech-badge px-3 py-1 bg-green-500 bg-opacity-20 text-green-300 rounded-full border border-green-500 border-opacity-30">
+                            Pandas
+                        </span>
+                        <span class="tech-badge px-3 py-1 bg-purple-500 bg-opacity-20 text-purple-300 rounded-full border border-purple-500 border-opacity-30">
+                            Plotly
+                        </span>
+                    </div>
+                    <div class="flex space-x-4">
+                        <button class="view-details-btn flex-1 py-3 bg-cyan-500 bg-opacity-20 text-cyan-400 rounded-lg font-semibold hover:bg-cyan-500 hover:bg-opacity-30 transition-all duration-300" data-project="2">
+                            <i class="fas fa-eye mr-2"></i>Détails
+                        </button>
+                        <a href="#" class="flex items-center justify-center w-12 h-12 bg-gray-700 bg-opacity-50 text-gray-300 rounded-lg hover:bg-gray-600 transition-all duration-300">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Projet 3: API REST FastAPI -->
+                <div class="project-card rounded-2xl p-6 glow-green fade-in-up project-item" data-category="fullstack" style="animation-delay: 0.5s;">
+                    <div class="project-image h-48 mb-6 glow-green">
+                        <i class="fas fa-server text-green-400"></i>
+                    </div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-green-400">API E-commerce</h3>
+                        <span class="text-xs px-3 py-1 bg-green-500 bg-opacity-20 text-green-300 rounded-full">Full Stack</span>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-6 leading-relaxed">
+                        API REST complète pour plateforme e-commerce avec authentification JWT, gestion des commandes et paiements.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="tech-badge px-3 py-1 bg-green-500 bg-opacity-20 text-green-300 rounded-full border border-green-500 border-opacity-30">
+                            FastAPI
+                        </span>
+                        <span class="tech-badge px-3 py-1 bg-cyan-500 bg-opacity-20 text-cyan-300 rounded-full border border-cyan-500 border-opacity-30">
+                            Python
+                        </span>
+                        <span class="tech-badge px-3 py-1 bg-blue-500 bg-opacity-20 text-blue-300 rounded-full border border-blue-500 border-opacity-30">
+                            PostgreSQL
+                        </span>
+                        <span class="tech-badge px-3 py-1 bg-orange-500 bg-opacity-20 text-orange-300 rounded-full border border-orange-500 border-opacity-30">
+                            JWT
+                        </span>
+                    </div>
+                    <div class="flex space-x-4">
+                        <button class="view-details-btn flex-1 py-3 bg-green-500 bg-opacity-20 text-green-400 rounded-lg font-semibold hover:bg-green-500 hover:bg-opacity-30 transition-all duration-300" data-project="3">
+                            <i class="fas fa-eye mr-2"></i>Détails
+                        </button>
+                        <a href="#" class="flex items-center justify-center w-12 h-12 bg-gray-700 bg-opacity-50 text-gray-300 rounded-lg hover:bg-gray-600 transition-all duration-300">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Projet 4: Portfolio React -->
+                <div class="project-card rounded-2xl p-6 glow-orange fade-in-up project-item" data-category="web" style="animation-delay: 0.6s;">
+                    <div class="project-image h-48 mb-6 glow-orange">
+                        <i class="fas fa-briefcase text-orange-400"></i>
+                    </div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-orange-400">Portfolio React</h3>
+                        <span class="text-xs px-3 py-1 bg-orange-500 bg-opacity-20 text-orange-300 rounded-full">Web</span>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-6 leading-relaxed">
+                        Application React moderne avec Tailwind CSS, animations fluides et design responsive pour présentation professionnelle.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="tech-badge px-3 py-1 bg-blue-500 bg-opacity-20 text-blue-300 rounded-full border border-blue-500 border-opacity-30">
+                            React
+                        </span>
+                        <span class="tech-badge px-3 py-1 bg-cyan-500 bg-opacity-20 text-cyan-300 rounded-full border border-cyan-500 border-opacity-30">
+                            Tailwind
+                        </span>
+                        <span class="tech-badge px-3 py-1 bg-yellow-500 bg-opacity-20 text-yellow-300 rounded-full border border-yellow-500 border-opacity-30">
+                            JavaScript
+                        </span>
+                        <span class="tech-badge px-3 py-1 bg-green-500 bg-opacity-20 text-green-300 rounded-full border border-green-500 border-opacity-30">
+                            Vite
+                        </span>
+                    </div>
+                    <div class="flex space-x-4">
+                        <button class="view-details-btn flex-1 py-3 bg-orange-500 bg-opacity-20 text-orange-400 rounded-lg font-semibold hover:bg-orange-500 hover:bg-opacity-30 transition-all duration-300" data-project="4">
+                            <i class="fas fa-eye mr-2"></i>Détails
+                        </button>
+                        <a href="#" class="flex items-center justify-center w-12 h-12 bg-gray-700 bg-opacity-50 text-gray-300 rounded-lg hover:bg-gray-600 transition-all duration-300">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Projet 5: Chatbot Intelligent -->
+                <div class="project-card rounded-2xl p-6 glow-purple fade-in-up project-item" data-category="ia" style="animation-delay: 0.7s;">
+                    <div class="project-image h-48 mb-6 glow-purple">
+                        <i class="fas fa-comments text-purple-400"></i>
+                    </div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-purple-400">Chatbot IA</h3>
+                        <span class="text-xs px-3 py-1 bg-purple-500 bg-opacity-20 text-purple-300 rounded-full">IA</span>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-6 leading-relaxed">
+                        Chatbot conversationnel intégrant NLP et machine learning pour assistance client 24/7 avec historique contextuel.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="tech-badge px-3 py-1 bg-purple-500 bg-opacity-20 text-purple-300 rounded-full border border-purple-500 border-opacity-30">
+                            Langchain
+                        </span>
+                        <span class="tech-badge px-3 py-1 bg-cyan-500 bg-opacity-20 text-cyan-300 rounded-full border border-cyan-500 border-opacity-30">
+                            Python
+                        </span>
+                        <span class="tech-badge px-3 py-1 bg-green-500 bg-opacity-20 text-green-300 rounded-full border border-green-500 border-opacity-30">
+                            FastAPI
+                        </span>
+                        <span class="tech-badge px-3 py-1 bg-blue-500 bg-opacity-20 text-blue-300 rounded-full border border-blue-500 border-opacity-30">
+                            WebSockets
+                        </span>
+                    </div>
+                    <div class="flex space-x-4">
+                        <button class="view-details-btn flex-1 py-3 bg-purple-500 bg-opacity-20 text-purple-400 rounded-lg font-semibold hover:bg-purple-500 hover:bg-opacity-30 transition-all duration-300" data-project="5">
+                            <i class="fas fa-eye mr-2"></i>Détails
+                        </button>
+                        <a href="#" class="flex items-center justify-center w-12 h-12 bg-gray-700 bg-opacity-50 text-gray-300 rounded-lg hover:bg-gray-600 transition-all duration-300">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Projet 6: Application Mobile -->
+                <div class="project-card rounded-2xl p-6 glow-cyan fade-in-up project-item" data-category="fullstack" style="animation-delay: 0.8s;">
+                    <div class="project-image h-48 mb-6 glow-cyan">
+                        <i class="fas fa-mobile-alt text-cyan-400"></i>
+                    </div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-cyan-400">App Mobile</h3>
+                        <span class="text-xs px-3 py-1 bg-cyan-500 bg-opacity-20 text-cyan-300 rounded-full">Full Stack</span>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-6 leading-relaxed">
+                        Application mobile cross-platform avec backend scalable et synchronisation en temps réel des données.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="tech-badge px-3 py-1 bg-blue-500 bg-opacity-20 text-blue-300 rounded-full border border-blue-500 border-opacity-30">
+                            React Native
+                        </span>
+                        <span class="tech-badge px-3 py-1 bg-green-500 bg-opacity-20 text-green-300 rounded-full border border-green-500 border-opacity-30">
+                            Node.js
+                        </span>
+                        <span class="tech-badge px-3 py-1 bg-red-500 bg-opacity-20 text-red-300 rounded-full border border-red-500 border-opacity-30">
+                            MongoDB
+                        </span>
+                        <span class="tech-badge px-3 py-1 bg-purple-500 bg-opacity-20 text-purple-300 rounded-full border border-purple-500 border-opacity-30">
+                            Socket.io
+                        </span>
+                    </div>
+                    <div class="flex space-x-4">
+                        <button class="view-details-btn flex-1 py-3 bg-cyan-500 bg-opacity-20 text-cyan-400 rounded-lg font-semibold hover:bg-cyan-500 hover:bg-opacity-30 transition-all duration-300" data-project="6">
+                            <i class="fas fa-eye mr-2"></i>Détails
+                        </button>
+                        <a href="#" class="flex items-center justify-center w-12 h-12 bg-gray-700 bg-opacity-50 text-gray-300 rounded-lg hover:bg-gray-600 transition-all duration-300">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Call to Action -->
+            <div class="text-center mt-16 fade-in-up" style="animation-delay: 0.9s;">
+                <p class="text-gray-300 text-xl mb-8">Vous avez un projet similaire en tête ?</p>
+                <a href="contact.html" class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-500 text-white rounded-2xl font-bold glow-cyan hover:glow-purple transition-all duration-300 transform hover:scale-105">
+                    <span>Discutons de votre projet</span>
+                    <i class="fas fa-arrow-right ml-3"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal pour les détails du projet -->
+    <div id="projectModal" class="project-modal">
+        <div class="min-h-screen flex items-center justify-center p-4">
+            <div class="modal-content rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+                <div class="p-8">
+                    <div class="flex justify-between items-start mb-6">
+                        <h2 id="modalTitle" class="text-3xl font-bold text-cyan-400"></h2>
+                        <button id="closeModal" class="text-gray-400 hover:text-white text-2xl">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div id="modalContent" class="text-gray-300">
+                        <!-- Le contenu sera injecté par JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 bg-opacity-50 border-t border-gray-700 border-opacity-30 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="flex justify-center space-x-6 mb-6">
+                    <a href="#" class="text-gray-400 hover:text-cyan-400 transition-colors duration-300 text-xl">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-cyan-400 transition-colors duration-300 text-xl">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-cyan-400 transition-colors duration-300 text-xl">
+                        <i class="fab fa-upwork"></i>
+                    </a>
+                </div>
+                <p class="text-gray-400">&copy; 2024 Roger Ciriaque Koadere. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Données des projets
+        const projectsData = {
+            1: {
+                title: "Assistant IA avec Langchain",
+                category: "IA",
+                description: "Assistant intelligent capable de traiter des documents PDF et de répondre aux questions contextuelles en utilisant les dernières avancées en traitement du langage naturel.",
+                longDescription: `
+                    <div class="space-y-6">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="text-lg font-semibold text-purple-400 mb-3">Fonctionnalités</h4>
+                                <ul class="space-y-2 text-gray-300">
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check text-green-400 mr-2"></i>
+                                        Traitement de documents PDF
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check text-green-400 mr-2"></i>
+                                        Réponses contextuelles
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check text-green-400 mr-2"></i>
+                                        Mémorisation de conversation
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check text-green-400 mr-2"></i>
+                                        Interface web intuitive
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold text-cyan-400 mb-3">Technologies</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="tech-badge px-3 py-1 bg-purple-500 bg-opacity-20 text-purple-300 rounded-full border border-purple-500 border-opacity-30">
+                                        Langchain
+                                    </span>
+                                    <span class="tech-badge px-3 py-1 bg-cyan-500 bg-opacity-20 text-cyan-300 rounded-full border border-cyan-500 border-opacity-30">
+                                        Python
+                                    </span>
+                                    <span class="tech-badge px-3 py-1 bg-green-500 bg-opacity-20 text-green-300 rounded-full border border-green-500 border-opacity-30">
+                                        FastAPI
+                                    </span>
+                                    <span class="tech-badge px-3 py-1 bg-blue-500 bg-opacity-20 text-blue-300 rounded-full border border-blue-500 border-opacity-30">
+                                        React
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-orange-400 mb-3">Défis Relevés</h4>
+                            <p class="text-gray-300">
+                                Développement d'un système de traitement de documents capable d'extraire et de structurer l'information 
+                                de manière efficace, avec une précision de réponse de plus de 90% sur les documents testés.
+                            </p>
+                        </div>
+                    </div>
+                `,
+                githubUrl: "#",
+                demoUrl: "#"
+            },
+            2: {
+                title: "Dashboard Analytics Streamlit",
+                category: "Web",
+                description: "Dashboard interactif pour l'analyse de données en temps réel avec visualisations avancées.",
+                longDescription: `
+                    <div class="space-y-6">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="text-lg font-semibold text-cyan-400 mb-3">Fonctionnalités</h4>
+                                <ul class="space-y-2 text-gray-300">
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check text-green-400 mr-2"></i>
+                                        Visualisations interactives
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check text-green-400 mr-2"></i>
+                                        Rapports automatisés
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check text-green-400 mr-2"></i>
+                                        Filtres dynamiques
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check text-green-400 mr-2"></i>
+                                        Export de données
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold text-purple-400 mb-3">Technologies</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="tech-badge px-3 py-1 bg-cyan-500 bg-opacity-20 text-cyan-300 rounded-full border border-cyan-500 border-opacity-30">
+                                        Streamlit
+                                    </span>
+                                    <span class="tech-badge px-3 py-1 bg-cyan-500 bg-opacity-20 text-cyan-300 rounded-full border border-cyan-500 border-opacity-30">
+                                        Python
+                                    </span>
+                                    <span class="tech-badge px-3 py-1 bg-green-500 bg-opacity-20 text-green-300 rounded-full border border-green-500 border-opacity-30">
+                                        Pandas
+                                    </span>
+                                    <span class="tech-badge px-3 py-1 bg-purple-500 bg-opacity-20 text-purple-300 rounded-full border border-purple-500 border-opacity-30">
+                                        Plotly
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                githubUrl: "#",
+                demoUrl: "#"
+            }
+            // Ajouter les autres projets de la même manière...
+        };
+
+        // Filtrage des projets
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const projectItems = document.querySelectorAll('.project-item');
+            const viewDetailsBtns = document.querySelectorAll('.view-details-btn');
+            const modal = document.getElementById('projectModal');
+            const closeModal = document.getElementById('closeModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalContent = document.getElementById('modalContent');
+
+            // Filtrage
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const filter = this.getAttribute('data-filter');
+                    
+                    // Mettre à jour les boutons actifs
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Filtrer les projets
+                    projectItems.forEach(item => {
+                        if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                            item.style.display = 'block';
+                            setTimeout(() => {
+                                item.style.opacity = '1';
+                                item.style.transform = 'translateY(0)';
+                            }, 50);
+                        } else {
+                            item.style.opacity = '0';
+                            item.style.transform = 'translateY(20px)';
+                            setTimeout(() => {
+                                item.style.display = 'none';
+                            }, 300);
+                        }
+                    });
+                });
+            });
+
+            // Modal des projets
+            viewDetailsBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const projectId = this.getAttribute('data-project');
+                    const project = projectsData[projectId];
+                    
+                    if (project) {
+                        modalTitle.textContent = project.title;
+                        modalContent.innerHTML = `
+                            <div class="mb-4">
+                                <span class="px-3 py-1 bg-${getColorByCategory(project.category)}-500 bg-opacity-20 text-${getColorByCategory(project.category)}-300 rounded-full text-sm">
+                                    ${project.category}
+                                </span>
+                            </div>
+                            <p class="text-lg mb-6">${project.description}</p>
+                            ${project.longDescription}
+                            <div class="flex space-x-4 mt-8">
+                                <a href="${project.githubUrl}" class="flex items-center px-6 py-3 bg-gray-700 bg-opacity-50 text-gray-300 rounded-lg hover:bg-gray-600 transition-all duration-300">
+                                    <i class="fab fa-github mr-2"></i>Code Source
+                                </a>
+                                <a href="${project.demoUrl}" class="flex items-center px-6 py-3 bg-cyan-500 bg-opacity-20 text-cyan-400 rounded-lg hover:bg-cyan-500 hover:bg-opacity-30 transition-all duration-300">
+                                    <i class="fas fa-external-link-alt mr-2"></i>Voir la Démo
+                                </a>
+                            </div>
+                        `;
+                        modal.style.display = 'block';
+                    }
+                });
+            });
+
+            // Fermer le modal
+            closeModal.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+
+            // Fermer le modal en cliquant à l'extérieur
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+
+            function getColorByCategory(category) {
+                const colors = {
+                    'IA': 'purple',
+                    'Web': 'cyan',
+                    'Full Stack': 'green'
+                };
+                return colors[category] || 'cyan';
+            }
+
+            // Menu mobile
+            const menuBtn = document.getElementById('menuBtn');
+            menuBtn.addEventListener('click', () => {
+                alert('Menu mobile - À implémenter');
+            });
+        });
+
+        // Intersection Observer pour les animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const animatedElements = document.querySelectorAll('.fade-in-up');
+            animatedElements.forEach(el => {
+                el.style.animationPlayState = 'paused';
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roger Ciriaque Koadere - Développeur IA et Web</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+            background: #0a1128;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Effets lumineux animés */
+        .glow-cyan {
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.4), 0 0 30px rgba(0, 255, 255, 0.2);
+        }
+
+        @media (min-width: 768px) {
+            .glow-cyan {
+                box-shadow: 0 0 20px rgba(0, 255, 255, 0.5), 0 0 40px rgba(0, 255, 255, 0.3);
+            }
+        }
+
+        .glow-orange {
+            box-shadow: 0 0 15px rgba(255, 140, 0, 0.4), 0 0 30px rgba(255, 140, 0, 0.2);
+        }
+
+        @media (min-width: 768px) {
+            .glow-orange {
+                box-shadow: 0 0 20px rgba(255, 140, 0, 0.5), 0 0 40px rgba(255, 140, 0, 0.3);
+            }
+        }
+
+        /* Particules flottantes en arrière-plan */
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.3; }
+            25% { transform: translate(50px, -50px) scale(1.1); opacity: 0.5; }
+            50% { transform: translate(-30px, -100px) scale(0.9); opacity: 0.3; }
+            75% { transform: translate(-70px, -50px) scale(1.05); opacity: 0.4; }
+        }
+
+        @media (min-width: 768px) {
+            @keyframes float {
+                0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.3; }
+                25% { transform: translate(100px, -100px) scale(1.1); opacity: 0.5; }
+                50% { transform: translate(-50px, -200px) scale(0.9); opacity: 0.3; }
+                75% { transform: translate(-150px, -100px) scale(1.05); opacity: 0.4; }
+            }
+        }
+
+        /* Animation de fade-in */
+        .fade-in {
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Animation de slide pour le nom */
+        .slide-in-left {
+            animation: slideInLeft 1s ease-out;
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @media (min-width: 768px) {
+            @keyframes slideInLeft {
+                from { opacity: 0; transform: translateX(-100px); }
+                to { opacity: 1; transform: translateX(0); }
+            }
+        }
+
+        /* Animation de slide pour le titre */
+        .slide-in-right {
+            animation: slideInRight 1.2s ease-out;
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @media (min-width: 768px) {
+            @keyframes slideInRight {
+                from { opacity: 0; transform: translateX(100px); }
+                to { opacity: 1; transform: translateX(0); }
+            }
+        }
+
+        /* Effet de pulsation pour les CTA */
+        .pulse-glow {
+            animation: pulseGlow 2s infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 15px rgba(0, 255, 255, 0.4), 0 0 30px rgba(0, 255, 255, 0.2); }
+            50% { box-shadow: 0 0 25px rgba(0, 255, 255, 0.6), 0 0 50px rgba(0, 255, 255, 0.4); }
+        }
+
+        @media (min-width: 768px) {
+            @keyframes pulseGlow {
+                0%, 100% { box-shadow: 0 0 20px rgba(0, 255, 255, 0.5), 0 0 40px rgba(0, 255, 255, 0.3); }
+                50% { box-shadow: 0 0 30px rgba(0, 255, 255, 0.8), 0 0 60px rgba(0, 255, 255, 0.5); }
+            }
+        }
+
+        /* Gradient animé */
+        .gradient-text {
+            background: linear-gradient(90deg, #00ffff, #ff8c00, #8a2be2, #00ff7f);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 5s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Effet hover sur les boutons */
+        .btn-hover {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-hover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-hover:hover::before {
+            left: 100%;
+        }
+
+        .btn-hover:hover {
+            transform: translateY(-3px);
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(10, 17, 40, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+        }
+
+        .nav-link {
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #00ffff, #ff8c00);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Menu mobile */
+        .mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .mobile-menu.active {
+            max-height: 400px;
+        }
+
+        /* Section hero */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding-top: 80px;
+        }
+
+        @media (max-width: 767px) {
+            .hero-section {
+                min-height: auto;
+                padding-top: 100px;
+                padding-bottom: 60px;
+            }
+        }
+
+        /* Image professionnelle placeholder */
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #00ffff 0%, #8a2be2 50%, #ff8c00 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            animation: slide-in 20s linear infinite;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 640px) {
+            .profile-image {
+                width: 250px;
+                height: 250px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .profile-image {
+                width: 300px;
+                height: 300px;
+            }
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .profile-image-inner {
+            width: calc(100% - 10px);
+            height: calc(100% - 10px);
+            border-radius: 50%;
+            background: #0a1128;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+        }
+
+        @media (min-width: 640px) {
+            .profile-image-inner {
+                font-size: 70px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .profile-image-inner {
+                font-size: 80px;
+            }
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(10px); }
+        }
+
+        /* Responsive text sizes */
+        .hero-title {
+            font-size: 2rem;
+            line-height: 1.2;
+        }
+
+        @media (min-width: 640px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .hero-title {
+                font-size: 3.5rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .hero-title {
+                font-size: 4rem;
+            }
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+        }
+
+        @media (min-width: 640px) {
+            .hero-subtitle {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .hero-subtitle {
+                font-size: 1.75rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .hero-subtitle {
+                font-size: 2rem;
+            }
+        }
+
+        .hero-description {
+            font-size: 1rem;
+        }
+
+        @media (min-width: 640px) {
+            .hero-description {
+                font-size: 1.125rem;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .hero-description {
+                font-size: 1.25rem;
+            }
+        }
+
+        /* Navigation active state */
+        .nav-active {
+            color: var(--cyan);
+            position: relative;
+        }
+
+        .nav-active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--cyan), var(--orange));
+        }
+    </style>
+</head>
+<body>
+    <!-- Particules d'arrière-plan -->
+    <div id="particles"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
+            <div class="flex justify-between items-center">
+                <div class="text-xl sm:text-2xl font-bold gradient-text">RCK</div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden lg:flex space-x-6 xl:space-x-8">
+                    <a href="Accueil.html" class="nav-active text-cyan-400 hover:text-cyan-400 text-sm xl:text-base">Accueil</a>
+                    <a href="About.html" class="nav-link text-gray-300 hover:text-cyan-400 text-sm xl:text-base">À propos</a>
+                    <a href="Compétences.html" class="nav-link text-gray-300 hover:text-cyan-400 text-sm xl:text-base">Compétences</a>
+                    <a href="Projets.html" class="nav-link text-gray-300 hover:text-cyan-400 text-sm xl:text-base">Projets</a>
+                    <a href="Expériences.html" class="nav-link text-gray-300 hover:text-cyan-400 text-sm xl:text-base">Expériences</a>
+                    <a href="Contact.html" class="nav-link text-gray-300 hover:text-cyan-400 text-sm xl:text-base">Contact</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="lg:hidden text-cyan-400 focus:outline-none" id="menuBtn">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" id="menuIcon">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                    <svg class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" id="closeIcon">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div class="mobile-menu lg:hidden" id="mobileMenu">
+                <div class="flex flex-col space-y-4 pt-4 pb-2">
+                    <a href="#accueil" class="text-gray-300 hover:text-cyan-400 transition-colors">Accueil</a>
+                    <a href="#apropos" class="text-gray-300 hover:text-cyan-400 transition-colors">À propos</a>
+                    <a href="#competences" class="text-gray-300 hover:text-cyan-400 transition-colors">Compétences</a>
+                    <a href="#projets" class="text-gray-300 hover:text-cyan-400 transition-colors">Projets</a>
+                    <a href="#experiences" class="text-gray-300 hover:text-cyan-400 transition-colors">Expériences</a>
+                    <a href="#contact" class="text-gray-300 hover:text-cyan-400 transition-colors">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Section Hero -->
+    <section id="accueil" class="hero-section">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center">
+                
+                <!-- Contenu texte -->
+                <div class="fade-in text-center md:text-left order-2 md:order-1">
+                    <h2 class="text-cyan-400 text-base sm:text-lg lg:text-xl mb-3 sm:mb-4 slide-in-left">Bonjour, je suis</h2>
+                    <h1 class="hero-title font-bold mb-3 sm:mb-4 slide-in-left">
+                        <span class="text-white">ROGER CIRIAQUE</span><br>
+                        <span class="gradient-text">KOADERE</span>
+                    </h1>
+                    <h3 class="hero-subtitle text-orange-400 mb-4 sm:mb-6 slide-in-right">
+                        Développeur IA et Web
+                    </h3>
+                    <p class="hero-description text-gray-300 mb-6 sm:mb-8 fade-in max-w-xl mx-auto md:mx-0" style="animation-delay: 0.5s;">
+                        Je transforme vos idées en solutions intelligentes et créatives
+                    </p>
+                    
+                    <!-- CTA Buttons -->
+                    <div class="flex flex-col sm:flex-row flex-wrap gap-4 justify-center md:justify-start fade-in" style="animation-delay: 0.8s;">
+                        <a href="#projets" class="btn-hover px-6 sm:px-8 py-3 sm:py-4 bg-cyan-500 text-white rounded-lg font-semibold pulse-glow text-sm sm:text-base text-center">
+                            Voir mes projets
+                        </a>
+                        <a href="#contact" class="btn-hover px-6 sm:px-8 py-3 sm:py-4 border-2 border-orange-400 text-orange-400 rounded-lg font-semibold glow-orange hover:bg-orange-400 hover:text-white text-sm sm:text-base text-center">
+                            Me contacter
+                        </a>
+                    </div>
+
+                    <!-- Social Links -->
+                    <div class="flex gap-4 sm:gap-6 mt-6 sm:mt-8 fade-in justify-center md:justify-start" style="animation-delay: 1s;">
+                        <a href="#" class="text-gray-400 hover:text-cyan-400 transition-colors" aria-label="GitHub">
+                            <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-cyan-400 transition-colors" aria-label="LinkedIn">
+                            <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-cyan-400 transition-colors" aria-label="Upwork">
+                            <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M18.561 13.158c-1.102 0-2.135-.467-3.074-1.227l.228-1.076.008-.042c.207-1.143.849-3.06 2.839-3.06 1.492 0 2.703 1.212 2.703 2.703-.001 1.489-1.212 2.702-2.704 2.702zm0-8.14c-2.539 0-4.51 1.649-5.31 4.366-1.22-1.834-2.148-4.036-2.687-5.892H7.828v7.112c-.002 1.406-1.141 2.546-2.547 2.548-1.405-.002-2.543-1.143-2.545-2.548V3.492H0v7.112c0 2.914 2.37 5.303 5.281 5.303 2.913 0 5.283-2.389 5.283-5.303v-1.19c.529 1.107 1.182 2.229 1.974 3.221l-1.673 7.873h2.797l1.213-5.71c1.063.679 2.285 1.109 3.686 1.109 3 0 5.439-2.452 5.439-5.45 0-3-2.439-5.439-5.439-5.439z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Image professionnelle -->
+                <div class="flex justify-center fade-in order-1 md:order-2" style="animation-delay: 0.3s;">
+                    <div class="profile-image glow-cyan">
+                        <div class="profile-image-inner">
+                            <img src="Photo de profil LinkedIn.png" alt="Roger Ciriaque Koadere - Photo de profil" class="rounded-full" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator - Hidden on mobile -->
+        <!--<div class="absolute bottom-6 sm:bottom-10 left-1/2 transform -translate-x-1/2 scroll-indicator hidden sm:block">
+            <div class="flex flex-col items-center">
+                <span class="text-gray-400 text-xs sm:text-sm mb-2">Scroll</span>
+                <svg class="w-5 h-5 sm:w-6 sm:h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+            </div>
+        </div>-->
+    </section>
+
+    <script>
+        // Créer des particules animées (nombre adaptatif selon la taille d'écran)
+        function createParticles() {
+            const container = document.getElementById('particles');
+            const colors = ['#00ffff', '#ff8c00', '#8a2be2', '#00ff7f'];
+            const particleCount = window.innerWidth < 768 ? 15 : 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                const size = window.innerWidth < 768 ? 
+                    Math.random() * 60 + 30 : 
+                    Math.random() * 100 + 50;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.animationDelay = Math.random() * 10 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                container.appendChild(particle);
+            }
+        }
+
+        createParticles();
+
+        // Recréer les particules lors du redimensionnement
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                const container = document.getElementById('particles');
+                container.innerHTML = '';
+                createParticles();
+            }, 250);
+        });
+
+        // Menu mobile
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const menuIcon = document.getElementById('menuIcon');
+        const closeIcon = document.getElementById('closeIcon');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            menuIcon.classList.toggle('hidden');
+            closeIcon.classList.toggle('hidden');
+        });
+
+        // Fermer le menu mobile lors du clic sur un lien
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                menuIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+            });
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Fermer le menu mobile si on clique en dehors
+        document.addEventListener('click', (e) => {
+            if (!menuBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
+                mobileMenu.classList.remove('active');
+                menuIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>

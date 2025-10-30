@@ -1,0 +1,2086 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roger Ciriaque Koadere - Développeur IA et Web</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+            background: #0a1128;
+            color: #ffffff;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Effets lumineux animés */
+        .glow-cyan {
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.4), 0 0 30px rgba(0, 255, 255, 0.2);
+        }
+
+        @media (min-width: 768px) {
+            .glow-cyan {
+                box-shadow: 0 0 20px rgba(0, 255, 255, 0.5), 0 0 40px rgba(0, 255, 255, 0.3);
+            }
+        }
+
+        .glow-orange {
+            box-shadow: 0 0 15px rgba(255, 140, 0, 0.4), 0 0 30px rgba(255, 140, 0, 0.2);
+        }
+
+        @media (min-width: 768px) {
+            .glow-orange {
+                box-shadow: 0 0 20px rgba(255, 140, 0, 0.5), 0 0 40px rgba(255, 140, 0, 0.3);
+            }
+        }
+
+        .glow-purple {
+            box-shadow: 0 0 15px rgba(138, 43, 226, 0.4), 0 0 30px rgba(138, 43, 226, 0.2);
+        }
+
+        @media (min-width: 768px) {
+            .glow-purple {
+                box-shadow: 0 0 20px rgba(138, 43, 226, 0.5), 0 0 40px rgba(138, 43, 226, 0.3);
+            }
+        }
+
+        .glow-green {
+            box-shadow: 0 0 15px rgba(0, 255, 127, 0.4), 0 0 30px rgba(0, 255, 127, 0.2);
+        }
+
+        @media (min-width: 768px) {
+            .glow-green {
+                box-shadow: 0 0 20px rgba(0, 255, 127, 0.5), 0 0 40px rgba(0, 255, 127, 0.3);
+            }
+        }
+
+        /* Particules flottantes en arrière-plan */
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.3; }
+            25% { transform: translate(50px, -50px) scale(1.1); opacity: 0.5; }
+            50% { transform: translate(-30px, -100px) scale(0.9); opacity: 0.3; }
+            75% { transform: translate(-70px, -50px) scale(1.05); opacity: 0.4; }
+        }
+
+        @media (min-width: 768px) {
+            @keyframes float {
+                0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.3; }
+                25% { transform: translate(100px, -100px) scale(1.1); opacity: 0.5; }
+                50% { transform: translate(-50px, -200px) scale(0.9); opacity: 0.3; }
+                75% { transform: translate(-150px, -100px) scale(1.05); opacity: 0.4; }
+            }
+        }
+
+        /* Animations de scroll avancées */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(80px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-80px) rotate(-5deg);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0) rotate(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(80px) rotate(5deg);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0) rotate(0);
+            }
+        }
+
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8) rotate(-10deg);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) rotate(0);
+            }
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 15px rgba(0, 255, 255, 0.4), 0 0 30px rgba(0, 255, 255, 0.2); }
+            50% { box-shadow: 0 0 25px rgba(0, 255, 255, 0.6), 0 0 50px rgba(0, 255, 255, 0.4); }
+        }
+
+        @media (min-width: 768px) {
+            @keyframes pulseGlow {
+                0%, 100% { box-shadow: 0 0 20px rgba(0, 255, 255, 0.5), 0 0 40px rgba(0, 255, 255, 0.3); }
+                50% { box-shadow: 0 0 30px rgba(0, 255, 255, 0.8), 0 0 60px rgba(0, 255, 255, 0.5); }
+            }
+        }
+
+        /* Classes d'animation */
+        .fade-in-up {
+            opacity: 0;
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        .slide-in-left {
+            opacity: 0;
+            animation: slideInLeft 1s ease-out forwards;
+        }
+
+        .slide-in-right {
+            opacity: 0;
+            animation: slideInRight 1s ease-out forwards;
+        }
+
+        .zoom-in {
+            opacity: 0;
+            animation: zoomIn 1s ease-out forwards;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #00ffff, #ff8c00, #8a2be2, #00ff7f);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 5s ease infinite;
+        }
+
+        /* Effet hover sur les boutons */
+        .btn-hover {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-hover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-hover:hover::before {
+            left: 100%;
+        }
+
+        .btn-hover:hover {
+            transform: translateY(-3px);
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(10, 17, 40, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .nav-scrolled {
+            background: rgba(10, 17, 40, 0.98);
+            box-shadow: 0 4px 20px rgba(0, 255, 255, 0.1);
+        }
+
+        .nav-link {
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #00ffff, #ff8c00);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-active {
+            color: #00ffff;
+            position: relative;
+        }
+
+        .nav-active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #00ffff, #ff8c00);
+        }
+
+        /* Menu mobile */
+        .mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            
+        }
+
+        .mobile-menu.active {
+            max-height: 400px;
+        }
+
+        /* Section hero */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding-top: 80px;
+        }
+
+        @media (max-width: 767px) {
+            .hero-section {
+                min-height: auto;
+                padding-top: 100px;
+                padding-bottom: 60px;
+            }
+        }
+
+        /* Image professionnelle placeholder */
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #00ffff 0%, #8a2be2 50%, #ff8c00 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            animation: slide-in 20s linear infinite;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 640px) {
+            .profile-image {
+                width: 250px;
+                height: 250px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .profile-image {
+                width: 300px;
+                height: 300px;
+            }
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .profile-image-inner {
+            width: calc(100% - 10px);
+            height: calc(100% - 10px);
+            border-radius: 50%;
+            background: #0a1128;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+        }
+
+        @media (min-width: 640px) {
+            .profile-image-inner {
+                font-size: 70px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .profile-image-inner {
+                font-size: 80px;
+            }
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(10px); }
+        }
+
+        /* Responsive text sizes */
+        .hero-title {
+            font-size: 2rem;
+            line-height: 1.2;
+        }
+
+        @media (min-width: 640px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .hero-title {
+                font-size: 3.5rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .hero-title {
+                font-size: 4rem;
+            }
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+        }
+
+        @media (min-width: 640px) {
+            .hero-subtitle {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .hero-subtitle {
+                font-size: 1.75rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .hero-subtitle {
+                font-size: 2rem;
+            }
+        }
+
+        .hero-description {
+            font-size: 1rem;
+        }
+
+        @media (min-width: 640px) {
+            .hero-description {
+                font-size: 1.125rem;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .hero-description {
+                font-size: 1.25rem;
+            }
+        }
+
+        /* Sections générales */
+        .section {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Progress bars */
+        .skill-bar {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            height: 8px;
+        }
+
+        .skill-progress {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 1.5s ease-in-out;
+            position: relative;
+        }
+
+        .skill-progress::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Cards hover effects */
+        .about-card, .skill-card, .project-card, .experience-card, .contact-card, .certification-card {
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-card::before, .skill-card::before, .project-card::before, .experience-card::before, .contact-card::before, .certification-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .about-card:hover::before, .skill-card:hover::before, .project-card:hover::before, .experience-card:hover::before, .contact-card:hover::before, .certification-card:hover::before {
+            left: 100%;
+        }
+
+        .about-card:hover, .skill-card:hover, .project-card:hover, .experience-card:hover, .contact-card:hover, .certification-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Timeline styles */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0.75rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #00ffff, #8a2be2);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 0.5rem;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            background: #00ffff;
+            border: 3px solid #0a1128;
+            box-shadow: 0 0 10px #00ffff;
+        }
+
+        .timeline-item:nth-child(2n)::before {
+            background: #ff8c00;
+            box-shadow: 0 0 10px #ff8c00;
+        }
+
+        .timeline-item:nth-child(3n)::before {
+            background: #8a2be2;
+            box-shadow: 0 0 10px #8a2be2;
+        }
+
+        .timeline-item:nth-child(4n)::before {
+            background: #00ff7f;
+            box-shadow: 0 0 10px #00ff7f;
+        }
+
+        /* Form styles */
+        .form-input {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            border-color: #00ffff;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #00ffff, #8a2be2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 255, 255, 0.4);
+        }
+
+        /* Styles pour les modales */
+        #projectModal {
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #projectModal.show {
+            opacity: 1;
+        }
+
+        .modal-content {
+            transform: scale(0.7);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        #projectModal.show .modal-content {
+            transform: scale(1);
+        }
+
+        .project-image {
+            background: linear-gradient(135deg, #1e293b, #374151);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        /* Animation delays pour le scroll */
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+        .delay-600 { animation-delay: 0.6s; }
+        .delay-700 { animation-delay: 0.7s; }
+        .delay-800 { animation-delay: 0.8s; }
+        .delay-900 { animation-delay: 0.9s; }
+        .delay-1000 { animation-delay: 1s; }
+    </style>
+</head>
+<body>
+    <!-- Particules d'arrière-plan -->
+    <div id="particles"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50" id="mainNav">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
+            <div class="flex justify-between items-center">
+                <div class="text-xl sm:text-2xl font-bold gradient-text">RCK</div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden lg:flex space-x-6 xl:space-x-8">
+                    <a href="#accueil" class="nav-link text-gray-300 hover:text-cyan-400 text-sm xl:text-base">Accueil</a>
+                    <a href="#apropos" class="nav-link text-gray-300 hover:text-cyan-400 text-sm xl:text-base">À propos</a>
+                    <a href="#competences" class="nav-link text-gray-300 hover:text-cyan-400 text-sm xl:text-base">Compétences</a>
+                    <a href="#projets" class="nav-link text-gray-300 hover:text-cyan-400 text-sm xl:text-base">Projets</a>
+                    <a href="#experiences" class="nav-link text-gray-300 hover:text-cyan-400 text-sm xl:text-base">Expériences</a>
+                    <a href="#contact" class="nav-link text-gray-300 hover:text-cyan-400 text-sm xl:text-base">Contact</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="lg:hidden text-cyan-400 focus:outline-none" id="menuBtn">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" id="menuIcon">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                    <svg class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" id="closeIcon">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div class="mobile-menu lg:hidden" id="mobileMenu">
+                <div class="flex flex-col space-y-4 pt-4 pb-2 ">
+                    <a href="#accueil" class="text-gray-300 hover:text-cyan-400 transition-colors">Accueil</a>
+                    <a href="#apropos" class="text-gray-300 hover:text-cyan-400 transition-colors">À propos</a>
+                    <a href="#competences" class="text-gray-300 hover:text-cyan-400 transition-colors">Compétences</a>
+                    <a href="#projets" class="text-gray-300 hover:text-cyan-400 transition-colors">Projets</a>
+                    <a href="#experiences" class="text-gray-300 hover:text-cyan-400 transition-colors">Expériences</a>
+                    <a href="#contact" class="text-gray-300 hover:text-cyan-400 transition-colors">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Section Hero -->
+    <section id="accueil" class="hero-section">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center">
+                
+                <!-- Contenu texte -->
+                <div class="fade-in text-center md:text-left order-2 md:order-1">
+                    <h2 class="text-cyan-400 text-base sm:text-lg lg:text-xl mb-3 sm:mb-4 slide-in-left">Bonjour, je suis</h2>
+                    <h1 class="hero-title font-bold mb-3 sm:mb-4 slide-in-left">
+                        <span class="text-white">ROGER CIRIAQUE</span><br>
+                        <span class="gradient-text">KOADERE</span>
+                    </h1>
+                    <h3 class="hero-subtitle text-orange-400 mb-4 sm:mb-6 slide-in-right">
+                        Développeur IA et Web
+                    </h3>
+                    <p class="hero-description text-gray-300 mb-6 sm:mb-8 fade-in max-w-xl mx-auto md:mx-0" style="animation-delay: 0.5s;">
+                        Je transforme vos idées en solutions intelligentes et créatives
+                    </p>
+                    
+                    <!-- CTA Buttons -->
+                    <div class="flex flex-col sm:flex-row flex-wrap gap-4 justify-center md:justify-start fade-in" style="animation-delay: 0.8s;">
+                        <a href="#projets" class="btn-hover px-6 sm:px-8 py-3 sm:py-4 bg-cyan-500 text-white rounded-lg font-semibold pulse-glow text-sm sm:text-base text-center">
+                            Voir mes projets
+                        </a>
+                        <a href="#contact" class="btn-hover px-6 sm:px-8 py-3 sm:py-4 border-2 border-orange-400 text-orange-400 rounded-lg font-semibold glow-orange hover:bg-orange-400 hover:text-white text-sm sm:text-base text-center">
+                            Me contacter
+                        </a>
+                    </div>
+
+                    <!-- Social Links -->
+                    <div class="flex gap-4 sm:gap-6 mt-6 sm:mt-8 fade-in justify-center md:justify-start" style="animation-delay: 1s;">
+                        <a href="https://github.com/" class="text-gray-400 hover:text-cyan-400 transition-colors" aria-label="GitHub">
+                            <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                        </a>
+                        <a href="https://www.linkedin.com/in/roger-ciriaque-koadere-355058277/" class="text-gray-400 hover:text-cyan-400 transition-colors" aria-label="LinkedIn">
+                            <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                            </svg>
+                        </a>
+                        <a href="https://www.upwork.com/freelancers/~01c27a308e9ad60208?viewMode=1" class="text-gray-400 hover:text-cyan-400 transition-colors" aria-label="Upwork">
+                            <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M18.561 13.158c-1.102 0-2.135-.467-3.074-1.227l.228-1.076.008-.042c.207-1.143.849-3.06 2.839-3.06 1.492 0 2.703 1.212 2.703 2.703-.001 1.489-1.212 2.702-2.704 2.702zm0-8.14c-2.539 0-4.51 1.649-5.31 4.366-1.22-1.834-2.148-4.036-2.687-5.892H7.828v7.112c-.002 1.406-1.141 2.546-2.547 2.548-1.405-.002-2.543-1.143-2.545-2.548V3.492H0v7.112c0 2.914 2.37 5.303 5.281 5.303 2.913 0 5.283-2.389 5.283-5.303v-1.19c.529 1.107 1.182 2.229 1.974 3.221l-1.673 7.873h2.797l1.213-5.71c1.063.679 2.285 1.109 3.686 1.109 3 0 5.439-2.452 5.439-5.45 0-3-2.439-5.439-5.439-5.439z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Image professionnelle -->
+                <div class="flex justify-center fade-in order-1 md:order-2" style="animation-delay: 0.3s;">
+                    <div class="profile-image glow-cyan">
+                        <div class="profile-image-inner">
+                            <img src="Photo de profil LinkedIn.png" alt="Roger Ciriaque Koadere - Photo de profil" class="rounded-full" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator - Hidden on mobile -->
+        <div class="absolute bottom-6 sm:bottom-10 left-1/2 transform -translate-x-1/2 scroll-indicator hidden sm:block">
+            <div class="flex flex-col items-center">
+                <span class="text-gray-400 text-xs sm:text-sm mb-2">Scroll</span>
+                <svg class="w-5 h-5 sm:w-6 sm:h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section À Propos -->
+    <section id="apropos" class="section py-20 bg-gray-900/50">
+        <!-- Le code exact de About.html va ici -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- En-tête -->
+            <div class="text-center mb-16">
+                <h1 class="text-4xl md:text-6xl font-bold gradient-text mb-6">À Propos de Moi</h1>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Passionné par l'IA et le développement web, je crée des solutions innovantes qui allient 
+                    performance technique et expérience utilisateur exceptionnelle.
+                </p>
+            </div>
+
+            <!-- Contenu principal -->
+            <div class="grid lg:grid-cols-2 gap-12 mb-16">
+                <!-- Colonne gauche -->
+                <div class="space-y-8">
+                    <!-- Parcours -->
+                    <div class="about-card rounded-2xl p-8 glow-cyan">
+                        <div class="flex items-center mb-6">
+                            <div class="w-14 h-14 bg-cyan-500 bg-opacity-20 rounded-xl flex items-center justify-center mr-4">
+                                <i class="fas fa-code text-cyan-400 text-2xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-cyan-400">Mon Parcours</h3>
+                        </div>
+                        <div class="space-y-4 text-gray-300 leading-relaxed">
+                            <p>
+                                Titulaire d'un BTS en informatique, j'ai choisi de me spécialiser en 
+                                <span class="text-cyan-400 font-semibold">intelligence artificielle</span> 
+                                et <span class="text-orange-400 font-semibold">développement web</span> car 
+                                je suis émerveillé à l'idée de créer des applications innovantes avec des technologies de pointe.
+                            </p>
+                            <p>
+                                Mon expertise couvre le développement d'IA avec <span class="text-purple-400 font-semibold">Langchain</span>, 
+                                la création d'APIs performantes avec <span class="text-green-400 font-semibold">FastAPI</span>, 
+                                et le développement d'interfaces utilisateur modernes.
+                            </p>
+                            <p>
+                                Autodidacte et constamment en formation, je maîtrise les dernières avancées 
+                                technologiques pour proposer des solutions à la fois robustes et innovantes.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Recherche -->
+                    <div class="about-card rounded-2xl p-8 glow-orange">
+                        <div class="flex items-center mb-6">
+                            <div class="w-14 h-14 bg-orange-500 bg-opacity-20 rounded-xl flex items-center justify-center mr-4">
+                                <i class="fas fa-bullseye text-orange-400 text-2xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-orange-400">Ce Que Je Recherche</h3>
+                        </div>
+                        <div class="space-y-4 text-gray-300 leading-relaxed">
+                            <p>
+                                Je suis ouvert aux <span class="text-orange-400 font-semibold">missions de freelance</span> 
+                                et aux <span class="text-cyan-400 font-semibold">collaborations innovantes</span> dans 
+                                le domaine de l'IA et du développement web.
+                            </p>
+                            <div class="space-y-3">
+                                <div class="flex items-center">
+                                    <i class="fas fa-rocket text-cyan-400 mr-3"></i>
+                                    <span>Développement d'applications IA avec Langchain</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-bolt text-purple-400 mr-3"></i>
+                                    <span>Création d'APIs performantes avec FastAPI</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-palette text-green-400 mr-3"></i>
+                                    <span>Conception d'interfaces utilisateur modernes</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-puzzle-piece text-orange-400 mr-3"></i>
+                                    <span>Résolution de problèmes techniques complexes</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Colonne droite -->
+                <div class="space-y-8">
+                    <!-- Valeurs -->
+                    <div class="about-card rounded-2xl p-8 glow-purple">
+                        <div class="flex items-center mb-6">
+                            <div class="w-14 h-14 bg-purple-500 bg-opacity-20 rounded-xl flex items-center justify-center mr-4">
+                                <i class="fas fa-star text-purple-400 text-2xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-purple-400">Mes Valeurs</h3>
+                        </div>
+                        <div class="space-y-6">
+                            <div class="flex items-start space-x-4">
+                                <div class="w-12 h-12 bg-cyan-500 bg-opacity-20 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                                    <i class="fas fa-lightbulb text-cyan-400"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-bold text-cyan-400 mb-2">Innovation Continue</h4>
+                                    <p class="text-gray-300 text-sm leading-relaxed">
+                                        Veille technologique constante et adoption des meilleures pratiques 
+                                        pour des solutions modernes et efficaces.
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-4">
+                                <div class="w-12 h-12 bg-green-500 bg-opacity-20 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                                    <i class="fas fa-medal text-green-400"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-bold text-green-400 mb-2">Excellence Technique</h4>
+                                    <p class="text-gray-300 text-sm leading-relaxed">
+                                        Code propre, documentation complète et tests rigoureux pour 
+                                        garantir qualité et maintenabilité.
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-4">
+                                <div class="w-12 h-12 bg-orange-500 bg-opacity-20 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                                    <i class="fas fa-handshake text-orange-400"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-bold text-orange-400 mb-2">Collaboration Ouverte</h4>
+                                    <p class="text-gray-300 text-sm leading-relaxed">
+                                        Communication transparente et travail d'équipe pour atteindre 
+                                        ensemble les objectifs du projet.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Motivations -->
+                    <div class="about-card rounded-2xl p-8 glow-green pb-12">
+                        <div class="flex items-center mb-6">
+                            <div class="w-14 h-14 bg-green-500 bg-opacity-20 rounded-xl flex items-center justify-center mr-4">
+                                <i class="fas fa-fire text-green-400 text-2xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-green-400">Mes Motivations</h3>
+                        </div>
+                        <div class="space-y-4 text-gray-300 leading-relaxed">
+                            <p>
+                                Passionné par le potentiel transformateur de l'<span class="text-cyan-400 font-semibold">intelligence artificielle</span>, 
+                                je m'engage à créer des solutions qui résolvent des problèmes complexes.
+                            </p>
+                            <p>
+                                Mon objectif est de <span class="text-green-400 font-semibold">créer un impact positif</span> 
+                                grâce à la technologie, en améliorant la productivité et l'expérience utilisateur.
+                            </p>
+                            <p>
+                                Je suis motivé par les défis techniques qui me poussent à repousser 
+                                mes limites et à apprendre continuellement.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statistiques -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+                <div class="text-center p-6 rounded-2xl bg-gray-800 bg-opacity-50 glow-cyan">
+                    <div class="text-3xl md:text-4xl font-bold text-cyan-400 mb-2 stats-counter" data-target="2">0</div>
+                    <div class="text-gray-400 text-sm">Années d'Expérience</div>
+                </div>
+                <div class="text-center p-6 rounded-2xl bg-gray-800 bg-opacity-50 glow-orange">
+                    <div class="text-3xl md:text-4xl font-bold text-orange-400 mb-2 stats-counter" data-target="10">0</div>
+                    <div class="text-gray-400 text-sm">Projets Réalisés</div>
+                </div>
+                <div class="text-center p-6 rounded-2xl bg-gray-800 bg-opacity-50 glow-purple">
+                    <div class="text-3xl md:text-4xl font-bold text-purple-400 mb-2 stats-counter" data-target="8">0</div>
+                    <div class="text-gray-400 text-sm">Technologies Maîtrisées</div>
+                </div>
+                <div class="text-center p-6 rounded-2xl bg-gray-800 bg-opacity-50 glow-green">
+                    <div class="text-3xl md:text-4xl font-bold text-green-400 mb-2 stats-counter" data-target="95">0</div>
+                    <div class="text-gray-400 text-sm">Satisfaction Client</div>
+                </div>
+            </div>
+
+            <!-- Call to Action -->
+            <div class="text-center">
+                <p class="text-gray-300 text-xl mb-8">Prêt à donner vie à votre projet ?</p>
+                <a href="#contact" class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-500 text-white rounded-2xl font-bold glow-cyan hover:glow-purple transition-all duration-300 transform hover:scale-105">
+                    <span>Commençons à collaborer</span>
+                    <i class="fas fa-arrow-right ml-3"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Compétences -->
+    <section id="competences" class="section py-20">
+        <!-- Le code exact de Compétences.html va ici -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- En-tête -->
+            <div class="text-center mb-16">
+                <h1 class="text-4xl md:text-6xl font-bold gradient-text mb-6">Mes Compétences</h1>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Un panorama complet de mes compétences techniques et personnelles, 
+                    constamment enrichi par l'apprentissage continu et l'expérience terrain.
+                </p>
+            </div>
+
+            <!-- Compétences Techniques -->
+            <div class="mb-20">
+                <h2 class="text-3xl md:text-4xl font-bold text-cyan-400 text-center mb-12">
+                    <i class="fas fa-laptop-code mr-4"></i>Compétences Techniques
+                </h2>
+
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <!-- Langages de Programmation -->
+                    <div class="skill-card rounded-2xl p-8 glow-cyan">
+                        <div class="flex items-center mb-6">
+                            <div class="w-14 h-14 bg-cyan-500 bg-opacity-20 rounded-xl flex items-center justify-center mr-4">
+                                <i class="fas fa-code text-cyan-400 text-2xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-cyan-400">Langages de Programmation</h3>
+                        </div>
+                        
+                        <div class="space-y-6">
+                            <!-- Python -->
+                            <div class="skill-item">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-gray-300 font-semibold">Python</span>
+                                    <span class="text-cyan-400 font-bold">90%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress bg-cyan-500" data-width="90%"></div>
+                                </div>
+                            </div>
+
+                            <!-- JavaScript -->
+                            <div class="skill-item">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-gray-300 font-semibold">JavaScript</span>
+                                    <span class="text-cyan-400 font-bold">70%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress bg-cyan-500" data-width="70%"></div>
+                                </div>
+                            </div>
+
+                            <!-- HTML/CSS -->
+                            <div class="skill-item">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-gray-300 font-semibold">HTML/CSS</span>
+                                    <span class="text-cyan-400 font-bold">90%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress bg-cyan-500" data-width="90%"></div>
+                                </div>
+                            </div>
+
+                            <!-- SQL -->
+                            <div class="skill-item">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-gray-300 font-semibold">SQL</span>
+                                    <span class="text-cyan-400 font-bold">60%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress bg-cyan-500" data-width="60%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Intelligence Artificielle -->
+                    <div class="skill-card rounded-2xl p-8 glow-purple">
+                        <div class="flex items-center mb-6">
+                            <div class="w-14 h-14 bg-purple-500 bg-opacity-20 rounded-xl flex items-center justify-center mr-4">
+                                <i class="fas fa-robot text-purple-400 text-2xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-purple-400">IA & Machine Learning</h3>
+                        </div>
+                        
+                        <div class="space-y-6">
+                            <!-- Langchain -->
+                            <div class="skill-item">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-gray-300 font-semibold">Langchain</span>
+                                    <span class="text-purple-400 font-bold">85%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress bg-purple-500" data-width="85%"></div>
+                                </div>
+                            </div>
+
+                            <!-- FastAPI -->
+                            <div class="skill-item">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-gray-300 font-semibold">FastAPI</span>
+                                    <span class="text-purple-400 font-bold">75%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress bg-purple-500" data-width="75%"></div>
+                                </div>
+                            </div>
+
+                            <!-- Streamlit -->
+                            <div class="skill-item">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-gray-300 font-semibold">Streamlit</span>
+                                    <span class="text-purple-400 font-bold">70%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress bg-purple-500" data-width="70%"></div>
+                                </div>
+                            </div>
+
+                            <!-- TensorFlow/PyTorch -->
+                            <!--<div class="skill-item">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-gray-300 font-semibold">TensorFlow/PyTorch</span>
+                                    <span class="text-purple-400 font-bold">75%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress bg-purple-500" data-width="75%"></div>
+                                </div>
+                            </div>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technologies & Outils -->
+            <div class="mb-20">
+                <h2 class="text-3xl md:text-4xl font-bold text-orange-400 text-center mb-12">
+                    <i class="fas fa-tools mr-4"></i>Technologies & Outils
+                </h2>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Développement Web -->
+                    <div class="skill-card rounded-2xl p-6 glow-orange">
+                        <h4 class="text-xl font-bold text-orange-400 mb-4 text-center">
+                            <i class="fas fa-globe mr-2"></i>Web
+                        </h4>
+                        <div class="flex flex-wrap gap-3 justify-center">
+                            <span class="px-4 py-2 bg-orange-500 bg-opacity-20 text-orange-300 rounded-full border border-orange-500 border-opacity-30">
+                                React
+                            </span>
+                            <span class="px-4 py-2 bg-orange-500 bg-opacity-20 text-orange-300 rounded-full border border-orange-500 border-opacity-30">
+                                Tailwind CSS
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Bases de Données -->
+                    <div class="skill-card rounded-2xl p-6 glow-green">
+                        <h4 class="text-xl font-bold text-green-400 mb-4 text-center">
+                            <i class="fas fa-database mr-2"></i>Bases de Données
+                        </h4>
+                        <div class="flex flex-wrap gap-3 justify-center">
+                            <span class="px-4 py-2 bg-green-500 bg-opacity-20 text-green-300 rounded-full border border-green-500 border-opacity-30">
+                                PostgreSQL
+                            </span>
+                            <span class="px-4 py-2 bg-green-500 bg-opacity-20 text-green-300 rounded-full border border-green-500 border-opacity-30">
+                                Supabase
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Outils & DevOps -->
+                    <div class="skill-card rounded-2xl p-6 glow-cyan">
+                        <h4 class="text-xl font-bold text-cyan-400 mb-4 text-center">
+                            <i class="fas fa-cogs mr-2"></i>Outils & DevOps
+                        </h4>
+                        <div class="flex flex-wrap gap-3 justify-center">
+                            <span class="px-4 py-2 bg-cyan-500 bg-opacity-20 text-cyan-300 rounded-full border border-cyan-500 border-opacity-30">
+                                Git/GitHub
+                            </span>
+                            <span class="px-4 py-2 bg-cyan-500 bg-opacity-20 text-cyan-300 rounded-full border border-cyan-500 border-opacity-30">
+                                Docker
+                            </span>
+                            <span class="px-4 py-2 bg-cyan-500 bg-opacity-20 text-cyan-300 rounded-full border border-cyan-500 border-opacity-30">
+                                VS Code
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Soft Skills -->
+            <div class="mb-20">
+                <h2 class="text-3xl md:text-4xl font-bold text-green-400 text-center mb-12">
+                    <i class="fas fa-brain mr-4"></i>Soft Skills
+                </h2>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Autonomie -->
+                    <div class="skill-card rounded-2xl p-6 text-center glow-green">
+                        <div class="w-16 h-16 bg-green-500 bg-opacity-20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-user-check text-green-400 text-2xl"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-green-400 mb-2">Autonomie</h4>
+                        <p class="text-gray-300 text-sm">
+                            Capacité à mener des projets de A à Z avec initiative et responsabilité
+                        </p>
+                    </div>
+
+                    <!-- Rigueur -->
+                    <div class="skill-card rounded-2xl p-6 text-center glow-cyan">
+                        <div class="w-16 h-16 bg-cyan-500 bg-opacity-20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-search text-cyan-400 text-2xl"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-cyan-400 mb-2">Rigueur</h4>
+                        <p class="text-gray-300 text-sm">
+                            Attention aux détails et respect des meilleures pratiques de développement
+                        </p>
+                    </div>
+
+                    <!-- Communication -->
+                    <div class="skill-card rounded-2xl p-6 text-center glow-orange">
+                        <div class="w-16 h-16 bg-orange-500 bg-opacity-20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-comments text-orange-400 text-2xl"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-orange-400 mb-2">Communication</h4>
+                        <p class="text-gray-300 text-sm">
+                            Échange clair et efficace avec les clients et membres d'équipe
+                        </p>
+                    </div>
+
+                    <!-- Résolution de problèmes -->
+                    <div class="skill-card rounded-2xl p-6 text-center glow-purple">
+                        <div class="w-16 h-16 bg-purple-500 bg-opacity-20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-puzzle-piece text-purple-400 text-2xl"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-purple-400 mb-2">Résolution</h4>
+                        <p class="text-gray-300 text-sm">
+                            Approche analytique pour résoudre des défis techniques complexes
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Call to Action -->
+            <div class="text-center">
+                <p class="text-gray-300 text-xl mb-8">Ces compétences vous intéressent pour votre projet ?</p>
+                <a href="#contact" class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-500 text-white rounded-2xl font-bold glow-cyan hover:glow-purple transition-all duration-300 transform hover:scale-105">
+                    <span>Discutons de votre projet</span>
+                    <i class="fas fa-arrow-right ml-3"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Projets -->
+    <section id="projets" class="section py-20 bg-gray-900/50">
+        <!-- Le code exact de Projets.html va ici -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- En-tête -->
+            <div class="text-center mb-16">
+                <h1 class="text-4xl md:text-6xl font-bold gradient-text mb-6">Mes Projets</h1>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Découvrez une sélection de mes réalisations en développement IA et web, 
+                    alliant innovation technique et design moderne.
+                </p>
+            </div>
+
+            <!-- Filtres -->
+            <div class="flex flex-wrap justify-center gap-4 mb-12">
+                <button class="filter-btn active px-6 py-3 rounded-full bg-purple-500 bg-opacity-20 text-purple-400 border-purple-500 border-opacity-50" data-filter="all">
+                    <i class="fas fa-layer-group mr-2"></i>Tous
+                </button>
+                <button class="filter-btn px-6 py-3 rounded-full bg-cyan-500 bg-opacity-10 text-gray-300 border-gray-600 hover:bg-cyan-500 hover:bg-opacity-20 hover:text-cyan-400 hover:border-cyan-500" data-filter="ia">
+                    <i class="fas fa-robot mr-2"></i>IA
+                </button>
+                <button class="filter-btn px-6 py-3 rounded-full bg-orange-500 bg-opacity-10 text-gray-300 border-gray-600 hover:bg-orange-500 hover:bg-opacity-20 hover:text-orange-400 hover:border-orange-500" data-filter="web">
+                    <i class="fas fa-globe mr-2"></i>Web
+                </button>
+                <!--<button class="filter-btn px-6 py-3 rounded-full bg-green-500 bg-opacity-10 text-gray-300 border-gray-600 hover:bg-green-500 hover:bg-opacity-20 hover:text-green-400 hover:border-green-500" data-filter="fullstack">
+                    <i class="fas fa-code mr-2"></i>Full Stack
+                </button>-->
+            </div>
+
+            <!-- Grille des projets -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="projectsGrid">
+                
+                <!-- Projet 1: Assistant IA avec Langchain -->
+                <div class="project-card rounded-2xl p-6 glow-cyan project-item" data-category="ia">
+                    <div class="project-image h-48 mb-6 glow-cyan">
+                        <img src="Projet_1.jpeg" alt="Assistant IA" class="h-full">
+                    </div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-cyan-400">Assistant juridique IA Langchain</h3>
+                        <span class="text-xs px-3 py-1 bg-cyan-500 bg-opacity-20 text-cyan-300 rounded-full">IA</span>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-6 leading-relaxed">
+                        Assistant intelligent développé avec Langchain, capable de répondre aux questions en lien avec le droit civil.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="px-3 py-1 bg-purple-500 bg-opacity-20 text-purple-300 rounded-full border border-purple-500 border-opacity-30 text-xs">
+                            Langchain
+                        </span>
+                        <span class="px-3 py-1 bg-cyan-500 bg-opacity-20 text-cyan-300 rounded-full border border-cyan-500 border-opacity-30 text-xs">
+                            Python
+                        </span>
+                        <span class="px-3 py-1 bg-green-500 bg-opacity-20 text-green-300 rounded-full border border-green-500 border-opacity-30 text-xs">
+                            FastAPI
+                        </span>
+                    </div>
+                    <div class="flex space-x-4">
+                        <button class="view-details-btn flex-1 py-3 bg-cyan-500 bg-opacity-20 text-cyan-400 rounded-lg font-semibold hover:bg-cyan-500 hover:bg-opacity-30 transition-all duration-300" data-project="1">
+                            <i class="fas fa-eye mr-2"></i>Détails
+                        </button>
+                        <a href="#" class="flex items-center justify-center w-12 h-12 bg-gray-700 bg-opacity-50 text-gray-300 rounded-lg hover:bg-gray-600 transition-all duration-300">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Projet 2: Application Web Streamlit -->
+                <div class="project-card rounded-2xl p-6 glow-orange project-item" data-category="web">
+                    <div class="project-image h-48 mb-6 glow-orange">
+                        <img src="Projet_2.png" alt="Site web" class="h-full">
+                    </div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-orange-400">Site web d'une imprimerie SMART VISUEL</h3>
+                        <span class="text-xs px-3 py-1 bg-orange-500 bg-opacity-20 text-orange-300 rounded-full">Web</span>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-6 leading-relaxed">
+                        Site web conçu sur mesure pour la présentation de l'entreprise, la mise en valeur de son expertise et de ses services.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="px-3 py-1 bg-green-500 bg-opacity-20 text-green-300 rounded-full border border-green-500 border-opacity-30 text-xs">
+                            HTML/CSS
+                        </span>
+                        <span class="px-3 py-1 bg-orange-500 bg-opacity-20 text-orange-300 rounded-full border border-orange-500 border-opacity-30 text-xs">
+                            Tailwindcss
+                        </span>
+                        <span class="px-3 py-1 bg-cyan-500 bg-opacity-20 text-cyan-300 rounded-full border border-cyan-500 border-opacity-30 text-xs">
+                            JavaScript
+                        </span>
+                    </div>
+                    <div class="flex space-x-4">
+                        <button class="view-details-btn flex-1 py-3 bg-orange-500 bg-opacity-20 text-orange-400 rounded-lg font-semibold hover:bg-orange-500 hover:bg-opacity-30 transition-all duration-300" data-project="2">
+                            <i class="fas fa-eye mr-2"></i>Détails
+                        </button>
+                        <a href="#" class="flex items-center justify-center w-12 h-12 bg-gray-700 bg-opacity-50 text-gray-300 rounded-lg hover:bg-gray-600 transition-all duration-300">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Projet 3: ASSITANT RESUME -->
+                <div class="project-card rounded-2xl p-6 glow-cyan project-item" data-category="ia">
+                    <div class="project-image h-48 mb-6 glow-cyan">
+                        <img src="Projet_3.jpeg" alt="Assistant qui résume des documents PDFs" class="h-full w-full">
+                    </div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-cyan-400">Assistant IA qui résume des documents PDFs</h3>
+                        <span class="text-xs px-3 py-1 bg-cyan-500 bg-opacity-20 text-cyan-300 rounded-full">IA</span>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-6 leading-relaxed">
+                        Assistant intélligent créer pour faire le résumé de documents PDFs développé avec Langchain et streamlit.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="px-3 py-1 bg-green-500 bg-opacity-20 text-green-300 rounded-full border border-green-500 border-opacity-30 text-xs">
+                           Python 
+                        </span>
+                        <span class="px-3 py-1 bg-cyan-500 bg-opacity-20 text-cyan-300 rounded-full border border-cyan-500 border-opacity-30 text-xs">
+                           Langchain 
+                        </span>
+                        <span class="px-3 py-1 bg-blue-500 bg-opacity-20 text-blue-300 rounded-full border border-blue-500 border-opacity-30 text-xs">
+                            Streamlit
+                        </span>
+                    </div>
+                    <div class="flex space-x-4">
+                        <button class="view-details-btn flex-1 py-3 bg-cyan-500 bg-opacity-20 text-cyan-400 rounded-lg font-semibold hover:bg-cyan-500 hover:bg-opacity-30 transition-all duration-300" data-project="3">
+                            <i class="fas fa-eye mr-2"></i>Détails
+                        </button>
+                        <a href="#" class="flex items-center justify-center w-12 h-12 bg-gray-700 bg-opacity-50 text-gray-300 rounded-lg hover:bg-gray-600 transition-all duration-300">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Call to Action -->
+            <div class="text-center mt-16">
+                <p class="text-gray-300 text-xl mb-8">Vous avez un projet similaire en tête ?</p>
+                <a href="#contact" class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-500 text-white rounded-2xl font-bold glow-cyan hover:glow-purple transition-all duration-300 transform hover:scale-105">
+                    <span>Discutons de votre projet</span>
+                    <i class="fas fa-arrow-right ml-3"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modales pour les projets -->
+    <div id="projectModal" class="fixed inset-0 z-50 hidden overflow-y-auto">
+        <div class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+            <!-- Overlay -->
+            <div class="fixed inset-0 transition-opacity bg-gray-900 bg-opacity-75 backdrop-blur-sm"></div>
+
+            <!-- Modal Content -->
+            <div class="relative inline-block w-full max-w-4xl my-8 overflow-hidden text-left align-middle transition-all transform bg-gray-800 rounded-2xl shadow-xl">
+                <!-- Header -->
+                <div class="flex items-center justify-between p-6 border-b border-gray-700">
+                    <div>
+                        <h3 id="modalTitle" class="text-2xl font-bold text-cyan-400"></h3>
+                        <span id="modalCategory" class="inline-block px-3 py-1 mt-2 text-xs rounded-full"></span>
+                    </div>
+                    <button id="closeModal" class="p-2 text-gray-400 transition-colors rounded-full hover:text-white hover:bg-gray-700">
+                        <i class="text-xl fas fa-times"></i>
+                    </button>
+                </div>
+
+                <!-- Body -->
+                <div class="p-6">
+                    <div class="grid gap-8 lg:grid-cols-2">
+                        <!-- Image et technologies -->
+                        <div>
+                            <div id="modalImage" class="project-image h-64 mb-6 rounded-xl"></div>
+                            <div class="mb-6">
+                                <h4 class="mb-3 text-lg font-semibold text-white">Technologies utilisées</h4>
+                                <div id="modalTechnologies" class="flex flex-wrap gap-2"></div>
+                            </div>
+                            <div class="flex gap-4">
+                                <a id="modalGithub" href="#" target="_blank" class="flex items-center justify-center flex-1 px-4 py-3 text-gray-300 transition-colors bg-gray-700 rounded-lg hover:bg-gray-600">
+                                    <i class="mr-2 fab fa-github"></i>
+                                    Code Source
+                                </a>
+                                <a id="modalDemo" href="#" target="_blank" class="flex items-center justify-center flex-1 px-4 py-3 text-cyan-400 transition-colors bg-cyan-500 bg-opacity-20 rounded-lg hover:bg-cyan-500 hover:bg-opacity-30">
+                                    <i class="mr-2 fas fa-external-link-alt"></i>
+                                    Voir la Démo
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Description détaillée -->
+                        <div>
+                            <div class="mb-6">
+                                <h4 class="mb-3 text-lg font-semibold text-white">Description du projet</h4>
+                                <p id="modalDescription" class="text-gray-300"></p>
+                            </div>
+
+                            <div class="mb-6">
+                                <h4 class="mb-3 text-lg font-semibold text-white">Fonctionnalités principales</h4>
+                                <ul id="modalFeatures" class="space-y-2 text-gray-300"></ul>
+                            </div>
+
+                            <div>
+                                <h4 class="mb-3 text-lg font-semibold text-white">Défis relevés</h4>
+                                <p id="modalChallenges" class="text-gray-300"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Section Expériences -->
+    <section id="experiences" class="section py-20">
+        <!-- Le code exact de Expériences.html va ici -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- En-tête -->
+            <div class="text-center mb-16">
+                <h1 class="text-4xl md:text-6xl font-bold gradient-text mb-6">Mon Parcours</h1>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Découvrez mon parcours professionnel, mes expériences significatives et les certifications 
+                    qui ont jalonné mon développement en tant que développeur IA et web.
+                </p>
+            </div>
+
+            <!-- Statistiques -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-16">
+                <div class="text-center p-4 md:p-6 rounded-2xl bg-gray-800 bg-opacity-50 glow-cyan">
+                    <div class="text-2xl md:text-3xl font-bold text-cyan-400 mb-2 stats-counter" data-target="2">0</div>
+                    <div class="text-gray-400 text-xs md:text-sm">Années d'Expérience</div>
+                </div>
+                <div class="text-center p-4 md:p-6 rounded-2xl bg-gray-800 bg-opacity-50 glow-orange">
+                    <div class="text-2xl md:text-3xl font-bold text-orange-400 mb-2 stats-counter" data-target="10">0</div>
+                    <div class="text-gray-400 text-xs md:text-sm">Projets Livrés</div>
+                </div>
+                <div class="text-center p-4 md:p-6 rounded-2xl bg-gray-800 bg-opacity-50 glow-purple">
+                    <div class="text-2xl md:text-3xl font-bold text-purple-400 mb-2 stats-counter" data-target="3">0</div>
+                    <div class="text-gray-400 text-xs md:text-sm">Certifications</div>
+                </div>
+                <div class="text-center p-4 md:p-6 rounded-2xl bg-gray-800 bg-opacity-50 glow-green">
+                    <div class="text-2xl md:text-3xl font-bold text-green-400 mb-2 stats-counter" data-target="10">0</div>
+                    <div class="text-gray-400 text-xs md:text-sm">Clients Satisfaits</div>
+                </div>
+            </div>
+
+            <!-- Timeline des expériences professionnelles -->
+            <div class="mb-20">
+                <h2 class="text-3xl md:text-4xl font-bold text-cyan-400 text-center mb-12">
+                    <i class="fas fa-briefcase mr-4"></i>Expériences Professionnelles
+                </h2>
+
+                <div class="timeline max-w-4xl mx-auto">
+                    <!-- Expérience 1 -->
+                    <div class="timeline-item">
+                        <div class="experience-card rounded-2xl p-6 glow-cyan">
+                            <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4 gap-2">
+                                <div>
+                                    <h3 class="text-xl font-bold text-cyan-400 mb-2">Développeur Web Full Stack</h3>
+                                    <p class="text-gray-300 font-semibold">Stage en Imprimerie Digitale</p>
+                                </div>
+                                <div class="text-right">
+                                    <span class="inline-block px-3 py-1 bg-cyan-500 bg-opacity-20 text-cyan-300 rounded-full text-sm">
+                                        Jan 2023 - Juin 2023
+                                    </span>
+                                </div>
+                            </div>
+                            
+                            <p class="text-gray-300 mb-4 leading-relaxed">
+                                Développement d'une plateforme web interne pour la gestion des commandes d'impression 
+                                et le suivi de production. Interface admin et espace client avec tableau de bord temps réel.
+                            </p>
+                            
+                            <div class="mb-4">
+                                <h4 class="text-sm font-semibold text-white mb-2">Missions principales :</h4>
+                                <ul class="text-gray-300 text-sm space-y-1 ml-4">
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check text-green-400 mr-2 text-xs"></i>
+                                        Conception et développement du frontend avec React.js
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check text-green-400 mr-2 text-xs"></i>
+                                        Création d'API REST avec FastAPI
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check text-green-400 mr-2 text-xs"></i>
+                                        Optimisation des performances et SEO
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-cyan-500 bg-opacity-20 text-cyan-300 rounded-full border border-cyan-500 border-opacity-30 text-xs">
+                                    React.js
+                                </span>
+                                <span class="px-3 py-1 bg-cyan-500 bg-opacity-20 text-cyan-300 rounded-full border border-cyan-500 border-opacity-30 text-xs">
+                                    FastAPI
+                                </span>
+                                <span class="px-3 py-1 bg-blue-500 bg-opacity-20 text-blue-300 rounded-full border border-blue-500 border-opacity-30 text-xs">
+                                    PostgreSQL
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Expérience 2 -->
+                    <div class="timeline-item">
+                        <div class="experience-card rounded-2xl p-6 glow-orange">
+                            <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4 gap-2">
+                                <div>
+                                    <h3 class="text-xl font-bold text-orange-400 mb-2">Développeur IA Freelance</h3>
+                                    <p class="text-gray-300 font-semibold">Projets Indépendants & Collaborations</p>
+                                </div>
+                                <div class="text-right">
+                                    <span class="inline-block px-3 py-1 bg-orange-500 bg-opacity-20 text-orange-300 rounded-full text-sm">
+                                        2022 - Présent
+                                    </span>
+                                </div>
+                            </div>
+                            
+                            <p class="text-gray-300 mb-4 leading-relaxed">
+                                Développement de solutions d'intelligence artificielle sur mesure pour divers clients, 
+                                incluant chatbots intelligents, systèmes de recommandation et outils d'analyse de données.
+                            </p>
+                            
+                            <div class="mb-4">
+                                <h4 class="text-sm font-semibold text-white mb-2">Réalisations clés :</h4>
+                                <ul class="text-gray-300 text-sm space-y-1 ml-4">
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check text-green-400 mr-2 text-xs"></i>
+                                        Assistant IA avec Langchain pour traitement de documents
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check text-green-400 mr-2 text-xs"></i>
+                                        Chatbot conversationnel intégrant NLP
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check text-green-400 mr-2 text-xs"></i>
+                                        API de prédiction avec FastAPI et déploiement Docker
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-purple-500 bg-opacity-20 text-purple-300 rounded-full border border-purple-500 border-opacity-30 text-xs">
+                                    Langchain
+                                </span>
+                                <span class="px-3 py-1 bg-cyan-500 bg-opacity-20 text-cyan-300 rounded-full border border-cyan-500 border-opacity-30 text-xs">
+                                    Python
+                                </span>
+                                <span class="px-3 py-1 bg-green-500 bg-opacity-20 text-green-300 rounded-full border border-green-500 border-opacity-30 text-xs">
+                                    FastAPI
+                                </span>
+                                <span class="px-3 py-1 bg-blue-500 bg-opacity-20 text-blue-300 rounded-full border border-blue-500 border-opacity-30 text-xs">
+                                    Docker
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Call to Action -->
+            <div class="text-center">
+                <p class="text-gray-300 text-xl mb-8">Mon parcours vous intéresse pour votre projet ?</p>
+                <a href="#contact" class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-500 text-white rounded-2xl font-bold glow-cyan hover:glow-purple transition-all duration-300 transform hover:scale-105">
+                    <span>Discutons de votre projet</span>
+                    <i class="fas fa-arrow-right ml-3"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Contact -->
+    <section id="contact" class="section py-20 bg-gray-900/50">
+        <!-- Le code exact de Contact.html va ici -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- En-tête -->
+            <div class="text-center mb-16">
+                <h1 class="text-4xl md:text-6xl font-bold gradient-text mb-6">Contactez-moi</h1>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Prêt à donner vie à votre projet ? Discutons de vos idées et voyons comment 
+                    je peux vous aider à les concrétiser avec des solutions innovantes.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12">
+                <!-- Formulaire de contact -->
+                <div>
+                    <div class="contact-card rounded-2xl p-8 glow-cyan">
+                        <h2 class="text-2xl font-bold text-cyan-400 mb-6 flex items-center">
+                            <i class="fas fa-paper-plane mr-3"></i>
+                            Envoyez un message
+                        </h2>
+                        
+                        <form id="contactForm" class="space-y-6">
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="name" class="block text-gray-300 mb-2">
+                                        <i class="fas fa-user mr-2"></i>Nom complet
+                                    </label>
+                                    <input type="text" id="name" name="name" 
+                                           class="form-input w-full px-4 py-3 rounded-lg text-white placeholder-gray-400"
+                                           placeholder="Votre nom"
+                                           required>
+                                </div>
+                                
+                                <div>
+                                    <label for="email" class="block text-gray-300 mb-2">
+                                        <i class="fas fa-envelope mr-2"></i>Email
+                                    </label>
+                                    <input type="email" id="email" name="email" 
+                                           class="form-input w-full px-4 py-3 rounded-lg text-white placeholder-gray-400"
+                                           placeholder="votre@email.com"
+                                           required>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label for="subject" class="block text-gray-300 mb-2">
+                                    <i class="fas fa-tag mr-2"></i>Sujet
+                                </label>
+                                <input type="text" id="subject" name="subject" 
+                                       class="form-input w-full px-4 py-3 rounded-lg text-white placeholder-gray-400"
+                                       placeholder="Sujet de votre message"
+                                       required>
+                            </div>
+                            
+                            <div>
+                                <label for="message" class="block text-gray-300 mb-2">
+                                    <i class="fas fa-comment mr-2"></i>Message
+                                </label>
+                                <textarea id="message" name="message" 
+                                          class="form-input w-full px-4 py-3 rounded-lg text-white placeholder-gray-400 resize-none"
+                                          rows="6"
+                                          placeholder="Décrivez votre projet ou votre demande..."
+                                          required></textarea>
+                            </div>
+                            
+                            <div class="flex items-center">
+                                <input type="checkbox" id="consent" name="consent" 
+                                       class="w-4 h-4 text-cyan-500 bg-gray-700 border-gray-600 rounded focus:ring-cyan-500 focus:ring-2"
+                                       required>
+                                <label for="consent" class="ml-2 text-sm text-gray-300">
+                                    J'accepte que mes données soient utilisées pour traiter ma demande
+                                </label>
+                            </div>
+                            
+                            <button type="submit" class="submit-btn w-full py-4 rounded-lg font-bold text-white relative overflow-hidden">
+                                <i class="fas fa-paper-plane mr-2"></i>Envoyer le message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Informations de contact -->
+                <div class="space-y-8">
+                    <!-- Coordonnées -->
+                    <div class="contact-card rounded-2xl p-8 glow-purple">
+                        <h2 class="text-2xl font-bold text-purple-400 mb-6 flex items-center">
+                            <i class="fas fa-address-card mr-3"></i>
+                            Mes coordonnées
+                        </h2>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-purple-500 bg-opacity-20 rounded-xl flex items-center justify-center mr-4">
+                                    <i class="fas fa-envelope text-purple-400"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-white">Email</h4>
+                                    <a href="mailto:roger.koadere@email.com" class="text-gray-300 hover:text-purple-400 transition-colors">
+                                        rogerkoadere@email.com
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-cyan-500 bg-opacity-20 rounded-xl flex items-center justify-center mr-4">
+                                    <i class="fas fa-phone text-cyan-400"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-white">Téléphone</h4>
+                                    <a href="tel:+33612345678" class="text-gray-300 hover:text-cyan-400 transition-colors">
+                                        +225 05 01 21 55 57
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-orange-500 bg-opacity-20 rounded-xl flex items-center justify-center mr-4">
+                                    <i class="fas fa-map-marker-alt text-orange-400"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-white">Localisation</h4>
+                                    <p class="text-gray-300">Yamoussoukro, Côte d'ivoire</p>
+                                    <p class="text-gray-400 text-sm">Disponible pour des missions en remote</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Réseaux sociaux -->
+                    <div class="contact-card rounded-2xl p-8 glow-orange">
+                        <h2 class="text-2xl font-bold text-orange-400 mb-6 flex items-center">
+                            <i class="fas fa-share-alt mr-3"></i>
+                            Réseaux sociaux
+                        </h2>
+                        
+                        <div class="grid grid-cols-2 gap-4">
+                            <a href="https://github.com/" class="p-4 rounded-xl text-center glow-cyan hover:glow-cyan text-cyan-400 border border-cyan-500 border-opacity-30">
+                                <i class="fab fa-github text-2xl mb-2"></i>
+                                <div class="text-sm font-semibold">GitHub</div>
+                                <div class="text-xs text-gray-400 mt-1">Mes projets</div>
+                            </a>
+                            
+                            <a href="https://www.linkedin.com/in/roger-ciriaque-koadere-355058277/" class="p-4 rounded-xl text-center glow-blue-400 hover:glow-blue-400 text-blue-400 border border-blue-500 border-opacity-30">
+                                <i class="fab fa-linkedin text-2xl mb-2"></i>
+                                <div class="text-sm font-semibold">LinkedIn</div>
+                                <div class="text-xs text-gray-400 mt-1">Profil pro</div>
+                            </a>
+                            
+                            <a href="https://www.upwork.com/freelancers/~01c27a308e9ad60208?viewMode=1" class="p-4 rounded-xl text-center glow-green hover:glow-green text-green-400 border border-green-500 border-opacity-30">
+                                <i class="fab fa-upwork text-2xl mb-2"></i>
+                                <div class="text-sm font-semibold">Upwork</div>
+                                <div class="text-xs text-gray-400 mt-1">Freelance</div>
+                            </a>
+                            
+                            <a href="#" class="p-4 rounded-xl text-center glow-purple hover:glow-purple text-purple-400 border border-purple-500 border-opacity-30">
+                                <i class="fab fa-whatsapp text-2xl mb-2"></i>
+                                <div class="text-sm font-semibold">Whatsapp</div>
+                                <div class="text-xs text-gray-400 mt-1">Discussion</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 bg-opacity-50 border-t border-gray-700 border-opacity-30 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="flex justify-center space-x-6 mb-6">
+                    <a href="https://github.com/" class="text-gray-400 hover:text-cyan-400 transition-colors duration-300 text-xl">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/roger-ciriaque-koadere-355058277/" class="text-gray-400 hover:text-cyan-400 transition-colors duration-300 text-xl">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-cyan-400 transition-colors duration-300 text-xl">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+                <p class="text-gray-400">&copy; 2024 Roger Ciriaque Koadere. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Créer des particules animées
+        function createParticles() {
+            const container = document.getElementById('particles');
+            const colors = ['#00ffff', '#ff8c00', '#8a2be2', '#00ff7f'];
+            const particleCount = window.innerWidth < 768 ? 15 : 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                const size = window.innerWidth < 768 ? 
+                    Math.random() * 60 + 30 : 
+                    Math.random() * 100 + 50;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.animationDelay = Math.random() * 10 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                container.appendChild(particle);
+            }
+        }
+
+        createParticles();
+
+        // Recréer les particules lors du redimensionnement
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                const container = document.getElementById('particles');
+                container.innerHTML = '';
+                createParticles();
+            }, 250);
+        });
+
+        // Menu mobile
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const menuIcon = document.getElementById('menuIcon');
+        const closeIcon = document.getElementById('closeIcon');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            menuIcon.classList.toggle('hidden');
+            closeIcon.classList.toggle('hidden');
+        });
+
+        // Fermer le menu mobile lors du clic sur un lien
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                menuIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+            });
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Fermer le menu mobile si on clique en dehors
+        document.addEventListener('click', (e) => {
+            if (!menuBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
+                mobileMenu.classList.remove('active');
+                menuIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+            }
+        });
+
+        // Animation au scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    // Animation des compteurs
+                    if (entry.target.querySelector('.stats-counter')) {
+                        animateCounters(entry.target);
+                    }
+                    
+                    // Animation des barres de compétences
+                    if (entry.target.querySelector('.skill-progress')) {
+                        animateSkillBars(entry.target);
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observer toutes les sections
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Animation des compteurs
+        function animateCounters(section) {
+            const counters = section.querySelectorAll('.stats-counter');
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-target'));
+                const suffix = counter.textContent.includes('%') ? '%' : '+';
+                let current = 0;
+                const increment = target / 50;
+                
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    counter.textContent = Math.floor(current) + (suffix === '%' ? '%' : suffix);
+                }, 40);
+            });
+        }
+
+        // Animation des barres de compétences
+        function animateSkillBars(section) {
+            const skillBars = section.querySelectorAll('.skill-progress');
+            skillBars.forEach(bar => {
+                const width = bar.getAttribute('data-width');
+                bar.style.width = width;
+            });
+        }
+
+        // Navigation active au scroll
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('nav-active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('nav-active');
+                }
+            });
+
+            // Effet sur la navigation
+            const nav = document.getElementById('mainNav');
+            if (window.scrollY > 100) {
+                nav.classList.add('nav-scrolled');
+            } else {
+                nav.classList.remove('nav-scrolled');
+            }
+        });
+
+        // Filtrage des projets
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const projectItems = document.querySelectorAll('.project-item');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const filter = this.getAttribute('data-filter');
+                
+                // Mettre à jour les boutons actifs
+                filterBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Filtrer les projets
+                projectItems.forEach(item => {
+                    if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                        item.style.display = 'block';
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                            item.style.transform = 'translateY(0)';
+                        }, 50);
+                    } else {
+                        item.style.opacity = '0';
+                        item.style.transform = 'translateY(20px)';
+                        setTimeout(() => {
+                            item.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
+
+        // Animation de la section hero au chargement
+        window.addEventListener('load', () => {
+            const heroElements = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right');
+            heroElements.forEach(el => {
+                el.style.animationPlayState = 'running';
+            });
+        });
+
+        // Données des projets
+        const projectsData = {
+            1: {
+                title: "Assistant juridique IA Langchain",
+                category: "IA",
+                description: "Assistant intelligent développé avec Langchain, capable de répondre aux questions en lien avec le droit civil. Cette application utilise des modèles de langage avancés pour comprendre et traiter les requêtes juridiques complexes.",
+                features: [
+                    "Compréhension contextuelle des questions juridiques",
+                    "Réponses précises basées sur le droit civil",
+                    "Interface utilisateur intuitive",
+                    "Traitement en temps réel des requêtes"
+                ],
+                challenges: "Le principal défi était de garantir la précision des réponses juridiques tout en maintenant une interface accessible pour les non-experts. J'ai dû mettre en place un système de validation des réponses et optimiser les performances pour un temps de réponse rapide.",
+                technologies: ["Langchain", "Python", "FastAPI", "Streamlit"],
+                github: "#",
+                demo: "#",
+                image: "Projet_1.jpeg"
+            },
+            2: {
+                title: "Site web d'une imprimerie SMART VISUEL",
+                category: "Web",
+                description: "Site web conçu sur mesure pour la présentation de l'entreprise, la mise en valeur de son expertise et de ses services. Design moderne et responsive optimisé pour le référencement et l'expérience utilisateur.",
+                features: [
+                    "Design responsive et moderne",
+                    "Présentation des services d'impression",
+                    "Formulaire de contact intégré",
+                    "Optimisation SEO avancée"
+                ],
+                challenges: "Créer une identité visuelle forte qui reflète le professionnalisme de l'entreprise tout en garantissant une expérience utilisateur fluide sur tous les appareils. J'ai particulièrement travaillé l'optimisation des images pour le secteur de l'impression.",
+                technologies: ["HTML/CSS", "TailwindCSS", "JavaScript", "PHP"],
+                github: "#",
+                demo: "#",
+                image: "Projet_2.png"
+            },
+            3: {
+                title: "Assistant IA qui résume des documents PDFs",
+                category: "IA",
+                description: "Assistant intelligent créé pour faire le résumé de documents PDFs développé avec Langchain et Streamlit. L'application permet de traiter des documents longs et d'en extraire les points essentiels automatiquement.",
+                features: [
+                    "Extraction automatique du contenu des PDF",
+                    "Génération de résumés structurés",
+                    "Interface drag-and-drop pour l'upload",
+                    "Support de documents en plusieurs langues"
+                ],
+                challenges: "La gestion des documents PDF de différentes structures et tailles représentait un défi technique. J'ai dû développer un système de parsing robuste et mettre en place des algorithmes de summarization adaptatifs.",
+                technologies: ["Python", "Langchain", "Streamlit", "PyPDF2"],
+                github: "#",
+                demo: "#",
+                image: "Projet_3.jpeg"
+            }
+        };
+
+        // Gestion des modales
+        const modal = document.getElementById('projectModal');
+        const closeModalBtn = document.getElementById('closeModal');
+        const viewDetailsBtns = document.querySelectorAll('.view-details-btn');
+
+        // Ouvrir la modal
+        viewDetailsBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const projectId = this.getAttribute('data-project');
+                openModal(projectId);
+            });
+        });
+
+        // Fermer la modal
+        closeModalBtn.addEventListener('click', closeModal);
+
+        // Fermer la modal en cliquant en dehors
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Fermer la modal avec la touche Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        function openModal(projectId) {
+            const project = projectsData[projectId];
+            if (!project) return;
+
+            // Remplir les données de la modal
+            document.getElementById('modalTitle').textContent = project.title;
+            document.getElementById('modalCategory').textContent = project.category;
+            document.getElementById('modalCategory').className = `inline-block px-3 py-1 mt-2 text-xs rounded-full ${
+                project.category === 'IA' ? 'bg-cyan-500 bg-opacity-20 text-cyan-300' : 
+                'bg-orange-500 bg-opacity-20 text-orange-300'
+            }`;
+            
+            document.getElementById('modalDescription').textContent = project.description;
+            document.getElementById('modalChallenges').textContent = project.challenges;
+
+            // Remplir les fonctionnalités
+            const featuresList = document.getElementById('modalFeatures');
+            featuresList.innerHTML = '';
+            project.features.forEach(feature => {
+                const li = document.createElement('li');
+                li.className = 'flex items-center';
+                li.innerHTML = `<i class="fas fa-check text-green-400 mr-2 text-xs"></i>${feature}`;
+                featuresList.appendChild(li);
+            });
+
+            // Remplir les technologies
+            const technologiesContainer = document.getElementById('modalTechnologies');
+            technologiesContainer.innerHTML = '';
+            project.technologies.forEach(tech => {
+                const span = document.createElement('span');
+                span.className = 'px-3 py-1 bg-cyan-500 bg-opacity-20 text-cyan-300 rounded-full border border-cyan-500 border-opacity-30 text-xs';
+                span.textContent = tech;
+                technologiesContainer.appendChild(span);
+            });
+
+            // Mettre à jour les liens
+            document.getElementById('modalGithub').href = project.github;
+            document.getElementById('modalDemo').href = project.demo;
+
+            // Mettre à jour l'image
+            const modalImage = document.getElementById('modalImage');
+            modalImage.innerHTML = `<img src="${project.image}" alt="${project.title}" class="w-full h-full object-cover rounded-xl">`;
+
+            // Afficher la modal
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+
+            // Animation d'entrée
+            setTimeout(() => {
+                modal.classList.add('show');
+            }, 50);
+        }
+
+        function closeModal() {
+            modal.classList.remove('show');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                document.body.style.overflow = 'auto';
+            }, 300);
+        }
+    </script>
+</body>
+</html>
