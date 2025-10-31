@@ -594,6 +594,339 @@
             font-size: 3rem;
         }
 
+        /* Conteneur principal de la modale */
+        #projectModal {
+            padding: 0.5rem;
+        }
+
+        @media (min-width: 640px) {
+            #projectModal {
+                padding: 1rem;
+            }
+        }
+
+        /* Wrapper de la modale */
+        #projectModal > div:first-child {
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 1rem 0.5rem;
+        }
+
+        @media (min-width: 640px) {
+            #projectModal > div:first-child {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Contenu de la modale */
+        #projectModal .inline-block {
+            width: 100% !important;
+            max-width: 100% !important;
+            margin: 0 !important;
+            max-height: 95vh;
+            overflow-y: auto;
+            display: inline !important;
+        }
+
+        @media (min-width: 640px) {
+            #projectModal .inline-block {
+                width: 95% !important;
+                max-width: 95% !important;
+            }
+        }
+
+        @media (min-width: 768px) {
+            #projectModal .inline-block {
+                width: 90% !important;
+                max-width: 48rem !important;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            #projectModal .inline-block {
+                max-width: 56rem !important;
+            }
+        }
+
+        /* Header de la modale */
+        #projectModal .flex.items-center.justify-between.p-6 {
+            flex-direction: row !important;
+            align-items: flex-start !important;
+            padding: 1rem !important;
+            position: relative;
+        }
+
+        @media (min-width: 640px) {
+            #projectModal .flex.items-center.justify-between.p-6 {
+                padding: 1.5rem !important;
+                align-items: center !important;
+            }
+        }
+
+        /* Groupe titre + catégorie */
+        #projectModal .flex.items-center.justify-between.p-6 > div:first-child {
+            flex: 1;
+            padding-right: 2rem;
+        }
+
+        /* Titre de la modale */
+        #modalTitle {
+            font-size: 1.125rem !important;
+            line-height: 1.3;
+            margin-bottom: 0.5rem;
+        }
+
+        @media (min-width: 640px) {
+            #modalTitle {
+                font-size: 1.5rem !important;
+            }
+        }
+
+        @media (min-width: 768px) {
+            #modalTitle {
+                font-size: 1.75rem !important;
+            }
+        }
+
+        /* Catégorie */
+        #modalCategory {
+            display: inline-block;
+            font-size: 0.75rem;
+        }
+
+        @media (min-width: 640px) {
+            #modalCategory {
+                font-size: 0.875rem;
+            }
+        }
+
+        /* Bouton de fermeture */
+        #closeModal {
+            position: absolute !important;
+            right: 0.5rem;
+            top: 0.5rem;
+            flex-shrink: 0;
+            width: 2rem;
+            height: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @media (min-width: 640px) {
+            #closeModal {
+                position: relative !important;
+                right: auto;
+                top: auto;
+                width: 2.5rem;
+                height: 2.5rem;
+            }
+        }
+
+        /* Body de la modale */
+        #projectModal .p-6:last-child {
+            padding: 1rem !important;
+        }
+
+        @media (min-width: 640px) {
+            #projectModal .p-6:last-child {
+                padding: 1.5rem !important;
+            }
+        }
+
+        /* Grid du contenu */
+        #projectModal .grid.gap-8 {
+            display: grid !important;
+            grid-template-columns: 1fr !important;
+            gap: 1.5rem !important;
+        }
+
+        @media (min-width: 1024px) {
+            #projectModal .grid.gap-8 {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 2rem !important;
+            }
+        }
+
+        /* Image de la modale */
+        #modalImage {
+            height: 180px !important;
+            margin-bottom: 1rem !important;
+        }
+
+        @media (min-width: 640px) {
+            #modalImage {
+                height: 220px !important;
+                margin-bottom: 1.5rem !important;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            #modalImage {
+                height: 16rem !important;
+            }
+        }
+
+        #modalImage img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Section Technologies */
+        #projectModal .mb-6:has(#modalTechnologies) {
+            margin-bottom: 1rem !important;
+        }
+
+        @media (min-width: 640px) {
+            #projectModal .mb-6:has(#modalTechnologies) {
+                margin-bottom: 1.5rem !important;
+            }
+        }
+
+        /* Titres des sections */
+        #projectModal h4 {
+            font-size: 0.875rem !important;
+            margin-bottom: 0.75rem !important;
+        }
+
+        @media (min-width: 640px) {
+            #projectModal h4 {
+                font-size: 1rem !important;
+            }
+        }
+
+        @media (min-width: 768px) {
+            #projectModal h4 {
+                font-size: 1.125rem !important;
+            }
+        }
+
+        /* Technologies */
+        #modalTechnologies {
+            display: flex !important;
+            flex-wrap: wrap !important;
+            gap: 0.5rem !important;
+        }
+
+        #modalTechnologies span {
+            font-size: 0.75rem !important;
+        }
+
+        /* Boutons GitHub et Demo */
+        #projectModal .flex.gap-4:has(#modalGithub) {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 0.75rem !important;
+        }
+
+        @media (min-width: 640px) {
+            #projectModal .flex.gap-4:has(#modalGithub) {
+                flex-direction: row !important;
+                gap: 1rem !important;
+            }
+        }
+
+        #modalGithub,
+        #modalDemo {
+            width: 100% !important;
+            text-align: center;
+            padding: 0.75rem 1rem !important;
+            font-size: 0.875rem !important;
+        }
+
+        @media (min-width: 640px) {
+            #modalGithub,
+            #modalDemo {
+                width: auto !important;
+                flex: 1;
+            }
+        }
+
+        /* Textes de description */
+        #modalDescription,
+        #modalChallenges {
+            font-size: 0.875rem !important;
+            line-height: 1.6;
+        }
+
+        @media (min-width: 640px) {
+            #modalDescription,
+            #modalChallenges {
+                font-size: 0.9375rem !important;
+            }
+        }
+
+        /* Liste des fonctionnalités */
+        #modalFeatures {
+            padding-left: 0 !important;
+            list-style: none;
+            font-size: 0.875rem !important;
+        }
+
+        @media (min-width: 640px) {
+            #modalFeatures {
+                font-size: 0.9375rem !important;
+            }
+        }
+
+        #modalFeatures li {
+            margin-bottom: 0.5rem !important;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        #modalFeatures li i {
+            margin-top: 0.25rem;
+            flex-shrink: 0;
+        }
+
+        /* Scrollbar personnalisée */
+        #projectModal .inline-block::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        #projectModal .inline-block::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+
+        #projectModal .inline-block::-webkit-scrollbar-thumb {
+            background: rgba(0, 255, 255, 0.4);
+            border-radius: 10px;
+        }
+
+        #projectModal .inline-block::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 255, 255, 0.6);
+        }
+
+        /* Espacement des sections */
+        #projectModal .mb-6 {
+            margin-bottom: 1rem !important;
+        }
+
+        @media (min-width: 640px) {
+            #projectModal .mb-6 {
+                margin-bottom: 1.5rem !important;
+            }
+        }
+
+        #projectModal .mb-3 {
+            margin-bottom: 0.75rem !important;
+        }
+
+        /* Border du header */
+        #projectModal .border-b {
+            border-bottom-width: 1px;
+        }
+
+        /* Overlay background */
+        #projectModal .fixed.inset-0.transition-opacity {
+            backdrop-filter: blur(4px);
+        }
+
         /* Animation delays pour le scroll */
         .delay-100 { animation-delay: 0.1s; }
         .delay-200 { animation-delay: 0.2s; }
